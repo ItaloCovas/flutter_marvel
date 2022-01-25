@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_marvel/pages/comics_page.dart';
 import 'package:flutter_marvel/themes/theme.dart';
 
 class HomePage extends StatefulWidget {
@@ -15,7 +16,7 @@ class _HomePageState extends State<HomePage> {
     var height = MediaQuery.of(context).size.height;
     return Scaffold(
       body: Container(
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             image: DecorationImage(
               image: AssetImage("assets/images/background.png"),
               fit: BoxFit.cover,
@@ -27,7 +28,7 @@ class _HomePageState extends State<HomePage> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               Row(
@@ -36,17 +37,22 @@ class _HomePageState extends State<HomePage> {
                   Column(
                     children: [
                       GestureDetector(
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => ComicsPage()));
+                        },
                         child: Image.asset(
                           "assets/images/spiderman.png",
                           width: 90,
                           height: 90,
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
-                      Text(
+                      const Text(
                         "Marvel Comics",
                         style: TextStyle(color: titleColor),
                       )
@@ -61,10 +67,10 @@ class _HomePageState extends State<HomePage> {
                           height: 90,
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
-                      Text(
+                      const Text(
                         "Marvel Series",
                         style: TextStyle(color: titleColor),
                       )

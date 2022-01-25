@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:intl/intl.dart';
 
-class DadosComic {
+class ComicsModel {
   int id;
   String title;
   int pageCount;
@@ -14,7 +14,7 @@ class DadosComic {
   String description;
   String jsonCache;
 
-  DadosComic({
+  ComicsModel({
     required this.id,
     required this.title,
     required this.pageCount,
@@ -28,8 +28,8 @@ class DadosComic {
     required this.jsonCache,
   });
 
-  factory DadosComic.from(DadosComic comic) {
-    return DadosComic(
+  factory ComicsModel.from(ComicsModel comic) {
+    return ComicsModel(
       id: comic.id,
       title: comic.title,
       pageCount: comic.pageCount,
@@ -44,8 +44,8 @@ class DadosComic {
     );
   }
 
-  factory DadosComic.fromJson(Map<String, dynamic> response) {
-    return DadosComic(
+  factory ComicsModel.fromJson(Map<String, dynamic> response) {
+    return ComicsModel(
       id: response["id"],
       title: response['title'],
       pageCount: response['pageCount'],

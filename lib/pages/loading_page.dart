@@ -19,7 +19,6 @@ class _LoadingPageState extends State<LoadingPage> {
         return const HomePage();
       }));
     });
-    // TODO: implement initState
     super.initState();
   }
 
