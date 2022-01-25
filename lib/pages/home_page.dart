@@ -11,9 +11,23 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
+    var width = MediaQuery.of(context).size.width;
+    var height = MediaQuery.of(context).size.height;
     return Scaffold(
       backgroundColor: blackGroundColor,
-      body: Container(),
+      body: Container(
+        width: width,
+        height: height,
+        child: Column(
+          children: [
+            Row(
+              children: [
+                Image(image: AssetImage("assets/images/icone_comics.png"))
+              ],
+            )
+          ],
+        ),
+      ),
     );
   }
 }
