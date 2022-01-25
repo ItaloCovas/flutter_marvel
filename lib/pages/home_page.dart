@@ -14,20 +14,66 @@ class _HomePageState extends State<HomePage> {
     var width = MediaQuery.of(context).size.width;
     var height = MediaQuery.of(context).size.height;
     return Scaffold(
-      backgroundColor: blackGroundColor,
       body: Container(
-        width: width,
-        height: height,
-        child: Column(
-          children: [
-            Row(
-              children: [
-                Image(image: AssetImage("assets/images/icone_comics.png"))
-              ],
-            )
-          ],
-        ),
-      ),
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage("assets/images/background.png"),
+              fit: BoxFit.cover,
+            ),
+          ),
+          width: width,
+          height: height,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              SizedBox(
+                height: 20,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Column(
+                    children: [
+                      GestureDetector(
+                        onTap: () {},
+                        child: Image.asset(
+                          "assets/images/spiderman.png",
+                          width: 90,
+                          height: 90,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Text(
+                        "Marvel Comics",
+                        style: TextStyle(color: titleColor),
+                      )
+                    ],
+                  ),
+                  Column(
+                    children: [
+                      GestureDetector(
+                        child: Image.asset(
+                          "assets/images/deadpool.png",
+                          width: 90,
+                          height: 90,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Text(
+                        "Marvel Series",
+                        style: TextStyle(color: titleColor),
+                      )
+                    ],
+                  ),
+                ],
+              ),
+            ],
+          )),
     );
   }
 }
