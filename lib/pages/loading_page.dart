@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_marvel/pages/home_page.dart';
+import 'package:flutter_marvel/themes/theme.dart';
 import 'package:lottie/lottie.dart';
 
 class LoadingPage extends StatefulWidget {
@@ -27,9 +28,10 @@ class _LoadingPageState extends State<LoadingPage> {
     var width = MediaQuery.of(context).size.width;
     var height = MediaQuery.of(context).size.height;
 
-    return SizedBox(
+    return Container(
       width: width,
       height: height,
+      color: backgroundColor,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
