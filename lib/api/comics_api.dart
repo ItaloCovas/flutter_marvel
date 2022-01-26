@@ -14,7 +14,6 @@ class ComicsApi {
       List<ComicsModel> list = [];
       var result = response.data;
 
-      //response.data.map((e) => ComicsModel.fromJson(e)).toList();
       for (var item in result['data']['results']) {
         ComicsModel model = ComicsModel.fromJson(item);
         if (model.thumbnailPath !=
