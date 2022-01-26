@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_marvel/controller/comics_store.dart';
+import 'package:flutter_marvel/controller/series_store.dart';
 import 'package:flutter_marvel/pages/home_page.dart';
 import 'package:flutter_marvel/pages/loading_page.dart';
 import 'package:get_it/get_it.dart';
@@ -7,6 +8,7 @@ import 'package:get_it/get_it.dart';
 void main() {
   GetIt getIt = GetIt.instance;
   getIt.registerSingleton<ComicsStore>(ComicsStore());
+  getIt.registerSingleton<SeriesStore>(SeriesStore());
   runApp(const MyApp());
 }
 

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_marvel/controller/series_store.dart';
 import 'package:flutter_marvel/pages/home_page.dart';
 import 'package:flutter_marvel/themes/theme.dart';
+import 'package:get_it/get_it.dart';
 
 class SeriesPage extends StatefulWidget {
   const SeriesPage({Key? key}) : super(key: key);
@@ -10,6 +12,13 @@ class SeriesPage extends StatefulWidget {
 }
 
 class _SeriesPageState extends State<SeriesPage> {
+  final comicsStore = GetIt.I.get<SeriesStore>();
+  @override
+  void initState() {
+    super.initState();
+    comicsStore.getSeriesList();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
