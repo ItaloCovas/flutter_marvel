@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_marvel/pages/comics_page.dart';
+import 'package:flutter_marvel/pages/series_page.dart';
 import 'package:flutter_marvel/themes/theme.dart';
 
 class HomePage extends StatefulWidget {
@@ -41,7 +42,7 @@ class _HomePageState extends State<HomePage> {
                           Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => ComicsPage()));
+                                  builder: (context) => const ComicsPage()));
                         },
                         child: Image.asset(
                           "assets/images/spiderman.png",
@@ -61,6 +62,12 @@ class _HomePageState extends State<HomePage> {
                   Column(
                     children: [
                       GestureDetector(
+                        onTap: () {
+                          Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const SeriesPage()));
+                        },
                         child: Image.asset(
                           "assets/images/deadpool.png",
                           width: 90,
