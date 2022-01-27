@@ -44,10 +44,12 @@ class _HomePageState extends State<HomePage> {
                               MaterialPageRoute(
                                   builder: (context) => const ComicsPage()));
                         },
-                        child: Image.asset(
-                          "assets/images/spiderman.png",
-                          width: 90,
-                          height: 90,
+                        child: Container(
+                          child: Image.asset(
+                            "assets/images/spiderman.png",
+                            width: 90,
+                            height: 90,
+                          ),
                         ),
                       ),
                       const SizedBox(

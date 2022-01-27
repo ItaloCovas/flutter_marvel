@@ -2,8 +2,11 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_marvel/controller/comics_store.dart';
+import 'package:flutter_marvel/pages/comicsdetails_page.dart';
 import 'package:flutter_marvel/pages/home_page.dart';
+import 'package:flutter_marvel/pages/series_page.dart';
 import 'package:flutter_marvel/themes/theme.dart';
+import 'package:flutter_marvel/widgets/search.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:get_it/get_it.dart';
 
@@ -15,6 +18,7 @@ class ComicsPage extends StatefulWidget {
 
 class _ComicsPageState extends State<ComicsPage> {
   final comicsStore = GetIt.I.get<ComicsStore>();
+
   @override
   void initState() {
     super.initState();
@@ -23,6 +27,8 @@ class _ComicsPageState extends State<ComicsPage> {
 
   @override
   Widget build(BuildContext context) {
+    var width = MediaQuery.of(context).size.width;
+
     var height = MediaQuery.of(context).size.height;
     return Scaffold(
       resizeToAvoidBottomInset: true,
@@ -32,6 +38,9 @@ class _ComicsPageState extends State<ComicsPage> {
           backgroundColor: secondaryBlack.withOpacity(0.5),
           showSelectedLabels: true,
           showUnselectedLabels: true,
+          selectedFontSize: 14,
+          selectedIconTheme:
+              const IconThemeData(color: primaryButton, size: 30),
           selectedItemColor: primaryButton,
           unselectedItemColor: titleColor,
           currentIndex: comicsStore.selectedIndex,
@@ -92,7 +101,7 @@ class _ComicsPageState extends State<ComicsPage> {
               fontFamily: 'Marvel',
               fontWeight: FontWeight.w600,
               letterSpacing: 3,
-              fontSize: 40,
+              fontSize: 35,
               shadows: [
                 Shadow(
                   blurRadius: 6.0,
@@ -106,7 +115,12 @@ class _ComicsPageState extends State<ComicsPage> {
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 7),
-            child: IconButton(onPressed: () {}, icon: const Icon(Icons.search)),
+            child: IconButton(
+                onPressed: () {
+                  Navigator.of(context)
+                      .push(MaterialPageRoute(builder: (_) => SearchWidget()));
+                },
+                icon: const Icon(Icons.search)),
           )
         ],
         leading: GestureDetector(
@@ -160,7 +174,10 @@ class _ComicsPageState extends State<ComicsPage> {
                 }
               }),
             ),
-            SizedBox(
+            Divider(
+              height: 10,
+            ),
+            const SizedBox(
               height: 20,
             ),
             Observer(builder: (_) {
@@ -176,7 +193,7 @@ class _ComicsPageState extends State<ComicsPage> {
                             const SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 2,
                           crossAxisSpacing: 3,
-                          mainAxisSpacing: 12,
+                          mainAxisSpacing: 5,
                           childAspectRatio: 0.75,
                         ),
                         itemCount: comicsStore.comicsModel?.length,
@@ -184,7 +201,8 @@ class _ComicsPageState extends State<ComicsPage> {
                           var comics = comicsStore.comicsModel![index];
                           return GestureDetector(
                             onTap: () {
-                              print('click');
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (_) => ComicsDetailsPage()));
                             },
                             child: Container(
                                 margin:
@@ -211,7 +229,7 @@ class _ComicsPageState extends State<ComicsPage> {
                                       ),
                                     ),
                                     const SizedBox(
-                                      height: 12,
+                                      height: 15,
                                     ),
                                     Container(
                                       decoration: BoxDecoration(
@@ -219,7 +237,7 @@ class _ComicsPageState extends State<ComicsPage> {
                                               color: Colors.grey.shade400,
                                               width: 2),
                                           borderRadius:
-                                              BorderRadius.circular(3)),
+                                              BorderRadius.circular(5)),
                                       child: Image.network(
                                         comics.thumbnailPath +
                                             "." +

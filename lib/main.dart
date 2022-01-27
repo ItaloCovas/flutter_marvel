@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           // is not restarted.
-          primarySwatch: Colors.blue,
+          primarySwatch: Colors.red,
         ),
         home: const ComicsPage());
   }
