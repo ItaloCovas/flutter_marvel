@@ -1,4 +1,12 @@
 class SeriesModel {
+  int code;
+  String status;
+  String copyright;
+  String attributionText;
+  String attributionHTML;
+  String etag;
+  Data data;
+
   SeriesModel({
     required this.code,
     required this.status,
@@ -8,22 +16,29 @@ class SeriesModel {
     required this.etag,
     required this.data,
   });
-  late final int code;
-  late final String status;
-  late final String copyright;
-  late final String attributionText;
-  late final String attributionHTML;
-  late final String etag;
-  late final Data data;
 
-  SeriesModel.fromJson(Map<String, dynamic> json) {
-    code = json['code'];
-    status = json['status'];
-    copyright = json['copyright'];
-    attributionText = json['attributionText'];
-    attributionHTML = json['attributionHTML'];
-    etag = json['etag'];
-    data = Data.fromJson(json['data']);
+  factory SeriesModel.from(SeriesModel serie) {
+    return SeriesModel(
+      code: serie.code,
+      status: serie.status,
+      copyright: serie.copyright,
+      attributionText: serie.attributionText,
+      attributionHTML: serie.attributionHTML,
+      etag: serie.etag,
+      data: serie.data,
+    );
+  }
+
+  factory SeriesModel.fromJson(Map<String, dynamic> response) {
+    return SeriesModel(
+      code: response['code'],
+      status: response['status'],
+      copyright: response['copyright'],
+      attributionText: response['attributionText'],
+      attributionHTML: response['attributionHTML'],
+      etag: response['etag'],
+      data: response['data'],
+    );
   }
 
   Map<String, dynamic> toJson() {
