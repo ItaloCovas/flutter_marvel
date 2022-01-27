@@ -13,6 +13,7 @@ class SeriesPage extends StatefulWidget {
 
 class _SeriesPageState extends State<SeriesPage> {
   final comicsStore = GetIt.I.get<SeriesStore>();
+
   @override
   void initState() {
     super.initState();

@@ -24,6 +24,21 @@ mixin _$ComicsStore on _ComicsStoreBase, Store {
     });
   }
 
+  final _$selectedIndexAtom = Atom(name: '_ComicsStoreBase.selectedIndex');
+
+  @override
+  int get selectedIndex {
+    _$selectedIndexAtom.reportRead();
+    return super.selectedIndex;
+  }
+
+  @override
+  set selectedIndex(int value) {
+    _$selectedIndexAtom.reportWrite(value, super.selectedIndex, () {
+      super.selectedIndex = value;
+    });
+  }
+
   final _$_ComicsStoreBaseActionController =
       ActionController(name: '_ComicsStoreBase');
 
@@ -41,7 +56,8 @@ mixin _$ComicsStore on _ComicsStoreBase, Store {
   @override
   String toString() {
     return '''
-comicsModel: ${comicsModel}
+comicsModel: ${comicsModel},
+selectedIndex: ${selectedIndex}
     ''';
   }
 }

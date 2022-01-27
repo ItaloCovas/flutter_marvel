@@ -1,4 +1,5 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_marvel/controller/comics_store.dart';
 import 'package:flutter_marvel/pages/home_page.dart';
@@ -26,16 +27,88 @@ class _ComicsPageState extends State<ComicsPage> {
     return Scaffold(
       resizeToAvoidBottomInset: true,
       backgroundColor: backgroundColor,
+      bottomNavigationBar: Observer(builder: (_) {
+        return BottomNavigationBar(
+          backgroundColor: secondaryBlack.withOpacity(0.5),
+          showSelectedLabels: true,
+          showUnselectedLabels: true,
+          selectedItemColor: primaryButton,
+          unselectedItemColor: titleColor,
+          currentIndex: comicsStore.selectedIndex,
+          onTap: (index) => comicsStore.selectedIndex = index,
+          items: const [
+            BottomNavigationBarItem(
+                icon: Icon(
+                  Icons.home,
+                ),
+                title: Text(
+                  "Home",
+                  style: TextStyle(
+                    fontFamily: "Marvel",
+                    fontWeight: FontWeight.w600,
+                    letterSpacing: 1,
+                    shadows: [
+                      Shadow(
+                        blurRadius: 6.0,
+                        color: Colors.black,
+                        offset: Offset(2.0, 2.0),
+                      ),
+                    ],
+                  ),
+                )),
+            BottomNavigationBarItem(
+                icon: Icon(
+                  Icons.live_tv_rounded,
+                ),
+                title: Text(
+                  "Series",
+                  style: TextStyle(
+                      fontFamily: "Marvel",
+                      fontWeight: FontWeight.w600,
+                      letterSpacing: 1),
+                )),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.movie_creation),
+                title: Text(
+                  "Movies",
+                  style: TextStyle(
+                      fontFamily: "Marvel",
+                      fontWeight: FontWeight.w600,
+                      letterSpacing: 1),
+                ))
+          ],
+        );
+      }),
       appBar: AppBar(
         backgroundColor: secondaryBlack,
+        centerTitle: true,
         elevation: 0,
-        title: Center(
-            child: Image.asset(
-          "assets/images/logo_marvel.png",
-          width: 100,
-          height: 70,
-        )),
-        actions: [IconButton(onPressed: () {}, icon: const Icon(Icons.search))],
+        title: Padding(
+          padding: const EdgeInsets.only(top: 5),
+          child: Text(
+            "Marvel Comics".toUpperCase(),
+            style: const TextStyle(
+              color: primaryButton,
+              fontFamily: 'Marvel',
+              fontWeight: FontWeight.w600,
+              letterSpacing: 3,
+              fontSize: 40,
+              shadows: [
+                Shadow(
+                  blurRadius: 6.0,
+                  color: Colors.black,
+                  offset: Offset(2.0, 2.0),
+                ),
+              ],
+            ),
+          ),
+        ),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 7),
+            child: IconButton(onPressed: () {}, icon: const Icon(Icons.search)),
+          )
+        ],
         leading: GestureDetector(
             onTap: () {
               Navigator.push(context,
@@ -87,75 +160,90 @@ class _ComicsPageState extends State<ComicsPage> {
                 }
               }),
             ),
+            SizedBox(
+              height: 20,
+            ),
             Observer(builder: (_) {
               if (comicsStore.comicsModel != null) {
                 return Flexible(
                   fit: FlexFit.loose,
-                  child: GridView.builder(
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                        crossAxisSpacing: 8,
-                        mainAxisSpacing: 8,
-                        childAspectRatio: 0.75,
-                      ),
-                      itemCount: comicsStore.comicsModel?.length,
-                      itemBuilder: (ctx, index) {
-                        var comics = comicsStore.comicsModel![index];
-                        return GestureDetector(
-                          onTap: () {
-                            print('click');
-                          },
-                          child: Container(
-                              margin: const EdgeInsets.only(left: 5, right: 5),
-                              decoration: BoxDecoration(
-                                  color: secondaryBlack,
-                                  borderRadius: BorderRadius.circular(10)),
-                              child: Column(
-                                children: [
-                                  const SizedBox(
-                                    height: 8,
-                                  ),
-                                  Center(
-                                    child: Text(
-                                      comics.title,
-                                      style: const TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 12,
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 8, right: 8),
+                    child: GridView.builder(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          crossAxisSpacing: 3,
+                          mainAxisSpacing: 12,
+                          childAspectRatio: 0.75,
+                        ),
+                        itemCount: comicsStore.comicsModel?.length,
+                        itemBuilder: (ctx, index) {
+                          var comics = comicsStore.comicsModel![index];
+                          return GestureDetector(
+                            onTap: () {
+                              print('click');
+                            },
+                            child: Container(
+                                margin:
+                                    const EdgeInsets.only(left: 5, right: 5),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                child: Column(
+                                  children: [
+                                    const SizedBox(
+                                      height: 8,
+                                    ),
+                                    Center(
+                                      child: Padding(
+                                        padding: const EdgeInsets.only(left: 5),
+                                        child: Text(
+                                          comics.title,
+                                          style: const TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 12,
+                                              fontFamily: "Marvel",
+                                              letterSpacing: 0.5),
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                  const SizedBox(
-                                    height: 8,
-                                  ),
-                                  Container(
-                                    decoration: BoxDecoration(
-                                      border: Border.all(
-                                          color: Colors.grey.shade400,
-                                          width: 2),
+                                    const SizedBox(
+                                      height: 12,
                                     ),
-                                    child: Image.network(
-                                      comics.thumbnailPath +
-                                          "." +
-                                          comics.thumbnailExtension,
-                                      width: 140,
-                                      height: 180,
-                                      fit: BoxFit.cover,
+                                    Container(
+                                      decoration: BoxDecoration(
+                                          border: Border.all(
+                                              color: Colors.grey.shade400,
+                                              width: 2),
+                                          borderRadius:
+                                              BorderRadius.circular(3)),
+                                      child: Image.network(
+                                        comics.thumbnailPath +
+                                            "." +
+                                            comics.thumbnailExtension,
+                                        width: 110,
+                                        height: 160,
+                                        fit: BoxFit.cover,
+                                      ),
                                     ),
-                                  ),
-                                ],
-                              )),
-                        );
-                      }),
+                                  ],
+                                )),
+                          );
+                        }),
+                  ),
                 );
               } else {
                 return const Center(
                   child: CircularProgressIndicator(),
                 );
               }
-            })
+            }),
+            SizedBox(
+              height: 25,
+            )
           ],
         ),
       ),

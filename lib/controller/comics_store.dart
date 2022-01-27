@@ -11,6 +11,9 @@ abstract class _ComicsStoreBase with Store {
   @observable
   ObservableList<ComicsModel>? comicsModel;
 
+  @observable
+  int selectedIndex = 0;
+
   @action
   getComicsList() {
     api.getComics().then((comicsList) {

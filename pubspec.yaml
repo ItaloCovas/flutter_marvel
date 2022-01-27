@@ -97,12 +97,23 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
-fonts:
- 
-  - family: RobotoMono
-  - fonts: 
-    - asset: assets/fonts/RobotoMono-Regular.ttf
-    - asset: assets/fonts/RobotoBold-Bold.ttf
-    - asset: assets/fonts/RobotoBold-Medium.ttf
+
+  fonts:
+    - family: Marvel
+      fonts:
+        - asset: assets/fonts/MarvelRegular-Dj83.ttf
+          style: italic
+    - family: RobotoMono
+      fonts:
+       - asset: assets/fonts/Roboto-Regular.ttf
+       - asset: assets/fonts/Roboto-Bold.ttf
+       - asset: assets/fonts/Roboto-Medium.ttf
+    
+     
+
+
+    
+
+    
 
 
