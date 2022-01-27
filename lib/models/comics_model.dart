@@ -59,9 +59,8 @@ class ComicsModel {
           response['thumbnail']['extension'],
       rawModified: response['modified'],
       modified: DateFormat('dd/MM/yyyy H:mm ').format(DateTime.parse(
-          response['modified'])), //ALgumas datas vem da api com o ano 0001
-      description:
-          response['description'] ?? 'Nenhuma descrição informada pela API.',
+          response['modified'])), //Some datas come with year:0001
+      description: response['description'] ?? 'Description not given!',
       jsonCache: json.encode(response),
     );
   }

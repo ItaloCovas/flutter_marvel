@@ -1,87 +1,113 @@
 class SeriesModel {
+  int? id;
+  String? title;
+  String? description;
+  String? resourceURI;
+  List<Urls>? urls;
+  int? startYear;
+  int? endYear;
+  String? rating;
+  String? type;
+  String? modified;
+  Thumbnail? thumbnail;
+  Creators? creators;
+  Characters? characters;
+  Creators? stories;
+  Creators? comics;
+  Characters? events;
+
   SeriesModel({
-    required this.id,
-    required this.title,
-    required this.description,
-    required this.resourceURI,
-    required this.urls,
-    required this.startYear,
-    required this.endYear,
-    required this.rating,
-    required this.type,
-    required this.modified,
-    required this.thumbnail,
-    required this.creators,
-    required this.characters,
-    required this.stories,
-    required this.comics,
-    required this.events,
+    this.id,
+    this.title,
+    this.description,
+    this.resourceURI,
+    this.urls,
+    this.startYear,
+    this.endYear,
+    this.rating,
+    this.type,
+    this.modified,
+    this.thumbnail,
+    this.creators,
+    this.characters,
+    this.stories,
+    this.comics,
+    this.events,
   });
-  late final int id;
-  late final String title;
-  late final String description;
-  late final String resourceURI;
-  late final List<Urls> urls;
-  late final int startYear;
-  late final int endYear;
-  late final String rating;
-  late final String type;
-  late final String modified;
-  late final Thumbnail thumbnail;
-  late final Creators creators;
-  late final Characters characters;
-  late final Stories stories;
-  late final Comics comics;
-  late final Events events;
 
   SeriesModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     title = json['title'];
-    description = json['description'] ?? 'Description not given :(';
+    description = json['description'] ?? 'Description not given!';
     resourceURI = json['resourceURI'];
-    urls = List.from(json['urls']).map((e) => Urls.fromJson(e)).toList();
+    if (json['urls'] != null) {
+      urls = <Urls>[];
+      json['urls'].forEach((v) {
+        urls!.add(Urls.fromJson(v));
+      });
+    }
     startYear = json['startYear'];
     endYear = json['endYear'];
     rating = json['rating'];
     type = json['type'];
     modified = json['modified'];
-    thumbnail = Thumbnail.fromJson(json['thumbnail']);
-    creators = Creators.fromJson(json['creators']);
-    characters = Characters.fromJson(json['characters']);
-    stories = Stories.fromJson(json['stories']);
-    comics = Comics.fromJson(json['comics']);
-    events = Events.fromJson(json['events']);
+    thumbnail = json['thumbnail'] != null
+        ? Thumbnail.fromJson(json['thumbnail'])
+        : null;
+    creators =
+        json['creators'] != null ? Creators.fromJson(json['creators']) : null;
+    characters = json['characters'] != null
+        ? Characters.fromJson(json['characters'])
+        : null;
+    stories =
+        json['stories'] != null ? Creators.fromJson(json['stories']) : null;
+    comics = json['comics'] != null ? Creators.fromJson(json['comics']) : null;
+    events =
+        json['events'] != null ? Characters.fromJson(json['events']) : null;
   }
 
   Map<String, dynamic> toJson() {
-    final _data = <String, dynamic>{};
-    _data['id'] = id;
-    _data['title'] = title;
-    _data['description'] = description;
-    _data['resourceURI'] = resourceURI;
-    _data['urls'] = urls.map((e) => e.toJson()).toList();
-    _data['startYear'] = startYear;
-    _data['endYear'] = endYear;
-    _data['rating'] = rating;
-    _data['type'] = type;
-    _data['modified'] = modified;
-    _data['thumbnail'] = thumbnail.toJson();
-    _data['creators'] = creators.toJson();
-    _data['characters'] = characters.toJson();
-    _data['stories'] = stories.toJson();
-    _data['comics'] = comics.toJson();
-    _data['events'] = events.toJson();
-    return _data;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['title'] = title;
+    data['description'] = description;
+    data['resourceURI'] = resourceURI;
+    if (urls != null) {
+      data['urls'] = urls!.map((v) => v.toJson()).toList();
+    }
+    data['startYear'] = startYear;
+    data['endYear'] = endYear;
+    data['rating'] = rating;
+    data['type'] = type;
+    data['modified'] = modified;
+    if (thumbnail != null) {
+      data['thumbnail'] = thumbnail!.toJson();
+    }
+    if (creators != null) {
+      data['creators'] = creators!.toJson();
+    }
+    if (characters != null) {
+      data['characters'] = characters!.toJson();
+    }
+    if (stories != null) {
+      data['stories'] = stories!.toJson();
+    }
+    if (comics != null) {
+      data['comics'] = comics!.toJson();
+    }
+    if (events != null) {
+      data['events'] = events!.toJson();
+    }
+
+    return data;
   }
 }
 
 class Urls {
-  Urls({
-    required this.type,
-    required this.url,
-  });
-  late final String type;
-  late final String url;
+  String? type;
+  String? url;
+
+  Urls({this.type, this.url});
 
   Urls.fromJson(Map<String, dynamic> json) {
     type = json['type'];
@@ -89,20 +115,18 @@ class Urls {
   }
 
   Map<String, dynamic> toJson() {
-    final _data = <String, dynamic>{};
-    _data['type'] = type;
-    _data['url'] = url;
-    return _data;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['type'] = type;
+    data['url'] = url;
+    return data;
   }
 }
 
 class Thumbnail {
-  Thumbnail({
-    required this.path,
-    required this.extension,
-  });
-  late final String path;
-  late final String extension;
+  String? path;
+  String? extension;
+
+  Thumbnail({this.path, this.extension});
 
   Thumbnail.fromJson(Map<String, dynamic> json) {
     path = json['path'];
@@ -110,51 +134,51 @@ class Thumbnail {
   }
 
   Map<String, dynamic> toJson() {
-    final _data = <String, dynamic>{};
-    _data['path'] = path;
-    _data['extension'] = extension;
-    return _data;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['path'] = path;
+    data['extension'] = extension;
+    return data;
   }
 }
 
 class Creators {
-  Creators({
-    required this.available,
-    required this.collectionURI,
-    required this.items,
-    required this.returned,
-  });
-  late final int available;
-  late final String collectionURI;
-  late final List<Items> items;
-  late final int returned;
+  int? available;
+  String? collectionURI;
+  List<Items>? items;
+  int? returned;
+
+  Creators({this.available, this.collectionURI, this.items, this.returned});
 
   Creators.fromJson(Map<String, dynamic> json) {
     available = json['available'];
     collectionURI = json['collectionURI'];
-    items = List.from(json['items']).map((e) => Items.fromJson(e)).toList();
+    if (json['items'] != null) {
+      items = <Items>[];
+      json['items'].forEach((v) {
+        items!.add(Items.fromJson(v));
+      });
+    }
     returned = json['returned'];
   }
 
   Map<String, dynamic> toJson() {
-    final _data = <String, dynamic>{};
-    _data['available'] = available;
-    _data['collectionURI'] = collectionURI;
-    _data['items'] = items.map((e) => e.toJson()).toList();
-    _data['returned'] = returned;
-    return _data;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['available'] = available;
+    data['collectionURI'] = collectionURI;
+    if (items != null) {
+      data['items'] = items!.map((v) => v.toJson()).toList();
+    }
+    data['returned'] = returned;
+    return data;
   }
 }
 
 class Items {
-  Items({
-    required this.resourceURI,
-    required this.name,
-    required this.role,
-  });
-  late final String resourceURI;
-  late final String name;
-  late final String role;
+  String? resourceURI;
+  String? name;
+  String? role;
+
+  Items({this.resourceURI, this.name, this.role});
 
   Items.fromJson(Map<String, dynamic> json) {
     resourceURI = json['resourceURI'];
@@ -163,126 +187,42 @@ class Items {
   }
 
   Map<String, dynamic> toJson() {
-    final _data = <String, dynamic>{};
-    _data['resourceURI'] = resourceURI;
-    _data['name'] = name;
-    _data['role'] = role;
-    return _data;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['resourceURI'] = resourceURI;
+    data['name'] = name;
+    data['role'] = role;
+    return data;
   }
 }
 
 class Characters {
-  Characters({
-    required this.available,
-    required this.collectionURI,
-    required this.items,
-    required this.returned,
-  });
-  late final int available;
-  late final String collectionURI;
-  late final List<Items> items;
-  late final int returned;
+  int? available;
+  String? collectionURI;
+  List<Items>? items;
+  int? returned;
+
+  Characters({this.available, this.collectionURI, this.items, this.returned});
 
   Characters.fromJson(Map<String, dynamic> json) {
     available = json['available'];
     collectionURI = json['collectionURI'];
-    items = List.from(json['items']).map((e) => Items.fromJson(e)).toList();
+    if (json['items'] != null) {
+      items = <Items>[];
+      json['items'].forEach((v) {
+        items!.add(Items.fromJson(v));
+      });
+    }
     returned = json['returned'];
   }
 
   Map<String, dynamic> toJson() {
-    final _data = <String, dynamic>{};
-    _data['available'] = available;
-    _data['collectionURI'] = collectionURI;
-    _data['items'] = items.map((e) => e.toJson()).toList();
-    _data['returned'] = returned;
-    return _data;
-  }
-}
-
-class Stories {
-  Stories({
-    required this.available,
-    required this.collectionURI,
-    required this.items,
-    required this.returned,
-  });
-  late final int available;
-  late final String collectionURI;
-  late final List<Items> items;
-  late final int returned;
-
-  Stories.fromJson(Map<String, dynamic> json) {
-    available = json['available'];
-    collectionURI = json['collectionURI'];
-    items = List.from(json['items']).map((e) => Items.fromJson(e)).toList();
-    returned = json['returned'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final _data = <String, dynamic>{};
-    _data['available'] = available;
-    _data['collectionURI'] = collectionURI;
-    _data['items'] = items.map((e) => e.toJson()).toList();
-    _data['returned'] = returned;
-    return _data;
-  }
-}
-
-class Comics {
-  Comics({
-    required this.available,
-    required this.collectionURI,
-    required this.items,
-    required this.returned,
-  });
-  late final int available;
-  late final String collectionURI;
-  late final List<Items> items;
-  late final int returned;
-
-  Comics.fromJson(Map<String, dynamic> json) {
-    available = json['available'];
-    collectionURI = json['collectionURI'];
-    items = List.from(json['items']).map((e) => Items.fromJson(e)).toList();
-    returned = json['returned'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final _data = <String, dynamic>{};
-    _data['available'] = available;
-    _data['collectionURI'] = collectionURI;
-    _data['items'] = items.map((e) => e.toJson()).toList();
-    _data['returned'] = returned;
-    return _data;
-  }
-}
-
-class Events {
-  Events({
-    required this.available,
-    required this.collectionURI,
-    required this.items,
-    required this.returned,
-  });
-  late final int available;
-  late final String collectionURI;
-  late final List<dynamic> items;
-  late final int returned;
-
-  Events.fromJson(Map<String, dynamic> json) {
-    available = json['available'];
-    collectionURI = json['collectionURI'];
-    items = List.castFrom<dynamic, dynamic>(json['items']);
-    returned = json['returned'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final _data = <String, dynamic>{};
-    _data['available'] = available;
-    _data['collectionURI'] = collectionURI;
-    _data['items'] = items;
-    _data['returned'] = returned;
-    return _data;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['available'] = available;
+    data['collectionURI'] = collectionURI;
+    if (items != null) {
+      data['items'] = items!.map((v) => v.toJson()).toList();
+    }
+    data['returned'] = returned;
+    return data;
   }
 }

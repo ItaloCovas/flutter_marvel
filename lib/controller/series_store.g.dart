@@ -24,6 +24,21 @@ mixin _$SeriesStore on _SeriesStoreBase, Store {
     });
   }
 
+  final _$selectedIndexAtom = Atom(name: '_SeriesStoreBase.selectedIndex');
+
+  @override
+  int get selectedIndex {
+    _$selectedIndexAtom.reportRead();
+    return super.selectedIndex;
+  }
+
+  @override
+  set selectedIndex(int value) {
+    _$selectedIndexAtom.reportWrite(value, super.selectedIndex, () {
+      super.selectedIndex = value;
+    });
+  }
+
   final _$_SeriesStoreBaseActionController =
       ActionController(name: '_SeriesStoreBase');
 
@@ -41,7 +56,8 @@ mixin _$SeriesStore on _SeriesStoreBase, Store {
   @override
   String toString() {
     return '''
-seriesModel: ${seriesModel}
+seriesModel: ${seriesModel},
+selectedIndex: ${selectedIndex}
     ''';
   }
 }

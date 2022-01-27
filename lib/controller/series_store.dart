@@ -11,6 +11,9 @@ abstract class _SeriesStoreBase with Store {
   @observable
   ObservableList<SeriesModel>? seriesModel;
 
+  @observable
+  int selectedIndex = 0;
+
   @action
   getSeriesList() {
     api.getSeries().then((seriesList) {

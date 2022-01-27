@@ -17,7 +17,10 @@ class SeriesApi {
 
       for (var item in result['data']['results']) {
         SeriesModel model = SeriesModel.fromJson(item);
-        list.add(model);
+        if (model.thumbnail!.path !=
+            'http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available') {
+          list.add(model);
+        }
       }
 
       return ObservableList<SeriesModel>.of(list);
