@@ -73,6 +73,17 @@ mixin _$ComicsStore on _ComicsStoreBase, Store {
       ActionController(name: '_ComicsStoreBase');
 
   @override
+  dynamic resetSelectedIndex() {
+    final _$actionInfo = _$_ComicsStoreBaseActionController.startAction(
+        name: '_ComicsStoreBase.resetSelectedIndex');
+    try {
+      return super.resetSelectedIndex();
+    } finally {
+      _$_ComicsStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   dynamic setSearchText(String value) {
     final _$actionInfo = _$_ComicsStoreBaseActionController.startAction(
         name: '_ComicsStoreBase.setSearchText');

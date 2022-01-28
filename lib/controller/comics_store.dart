@@ -21,6 +21,11 @@ abstract class _ComicsStoreBase with Store {
   String searchText = '';
 
   @action
+  resetSelectedIndex() {
+    selectedIndex = 0;
+  }
+
+  @action
   setSearchText(String value) {
     searchText = value;
   }

@@ -3,6 +3,8 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_marvel/controller/series_store.dart';
+import 'package:flutter_marvel/pages/characters_page.dart';
+import 'package:flutter_marvel/pages/comics_page.dart';
 import 'package:flutter_marvel/pages/home_page.dart';
 import 'package:flutter_marvel/themes/theme.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -38,46 +40,35 @@ class _SeriesPageState extends State<SeriesPage> {
           unselectedItemColor: titleColor,
           currentIndex: seriesStore.selectedIndex,
           onTap: (index) => seriesStore.selectedIndex = index,
-          items: const [
+          items: [
             BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.home,
-                ),
-                title: Text(
-                  "Home",
-                  style: TextStyle(
-                    fontFamily: "Marvel",
-                    fontWeight: FontWeight.w600,
-                    letterSpacing: 1,
-                    shadows: [
-                      Shadow(
-                        blurRadius: 6.0,
-                        color: Colors.black,
-                        offset: Offset(2.0, 2.0),
-                      ),
-                    ],
-                  ),
-                )),
+              icon: IconButton(
+                onPressed: () {
+                  print('teste');
+                },
+                icon: const Icon(Icons.live_tv_rounded),
+              ),
+              label: "Series",
+            ),
             BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.live_tv_rounded,
-                ),
-                title: Text(
-                  "Series",
-                  style: TextStyle(
-                      fontFamily: "Marvel",
-                      fontWeight: FontWeight.w600,
-                      letterSpacing: 1),
-                )),
+              icon: IconButton(
+                onPressed: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (_) => const CharactersPage()));
+                },
+                icon: const Icon(Icons.face),
+              ),
+              label: "Characters",
+            ),
             BottomNavigationBarItem(
-                icon: Icon(Icons.movie_creation),
-                title: Text(
-                  "Movies",
-                  style: TextStyle(
-                      fontFamily: "Marvel",
-                      fontWeight: FontWeight.w600,
-                      letterSpacing: 1),
-                ))
+              icon: IconButton(
+                onPressed: () {
+                  print('teste');
+                },
+                icon: const Icon(Icons.schedule),
+              ),
+              label: "Events",
+            )
           ],
         );
       }),

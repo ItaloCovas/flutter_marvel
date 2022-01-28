@@ -4,7 +4,6 @@ import 'package:flutter_marvel/controller/characters_store.dart';
 import 'package:flutter_marvel/controller/comics_store.dart';
 import 'package:flutter_marvel/controller/series_store.dart';
 import 'package:flutter_marvel/pages/comics_page.dart';
-import 'package:flutter_marvel/pages/home_page.dart';
 import 'package:flutter_marvel/pages/loading_page.dart';
 import 'package:get_it/get_it.dart';
 
@@ -22,7 +21,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: 'Flutter Demo',
+        title: 'Flutter Marvel',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           // is not restarted.

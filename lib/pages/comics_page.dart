@@ -51,6 +51,15 @@ class _ComicsPageState extends State<ComicsPage> {
             BottomNavigationBarItem(
               icon: IconButton(
                 onPressed: () {
+                  print('teste');
+                },
+                icon: const Icon(Icons.menu_book),
+              ),
+              label: "Comics",
+            ),
+            BottomNavigationBarItem(
+              icon: IconButton(
+                onPressed: () {
                   Navigator.of(context).push(MaterialPageRoute(
                       builder: (_) => const CharactersPage()));
                 },
@@ -63,18 +72,9 @@ class _ComicsPageState extends State<ComicsPage> {
                 onPressed: () {
                   print('teste');
                 },
-                icon: const Icon(Icons.live_tv_rounded),
+                icon: const Icon(Icons.schedule),
               ),
-              label: "Movies",
-            ),
-            BottomNavigationBarItem(
-              icon: IconButton(
-                onPressed: () {
-                  print('teste');
-                },
-                icon: const Icon(Icons.movie_creation),
-              ),
-              label: "Series",
+              label: "Events",
             )
           ],
         );
