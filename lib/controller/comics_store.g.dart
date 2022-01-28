@@ -39,8 +39,60 @@ mixin _$ComicsStore on _ComicsStoreBase, Store {
     });
   }
 
+  final _$isSearchingAtom = Atom(name: '_ComicsStoreBase.isSearching');
+
+  @override
+  bool get isSearching {
+    _$isSearchingAtom.reportRead();
+    return super.isSearching;
+  }
+
+  @override
+  set isSearching(bool value) {
+    _$isSearchingAtom.reportWrite(value, super.isSearching, () {
+      super.isSearching = value;
+    });
+  }
+
+  final _$searchTextAtom = Atom(name: '_ComicsStoreBase.searchText');
+
+  @override
+  String get searchText {
+    _$searchTextAtom.reportRead();
+    return super.searchText;
+  }
+
+  @override
+  set searchText(String value) {
+    _$searchTextAtom.reportWrite(value, super.searchText, () {
+      super.searchText = value;
+    });
+  }
+
   final _$_ComicsStoreBaseActionController =
       ActionController(name: '_ComicsStoreBase');
+
+  @override
+  dynamic setSearchText(String value) {
+    final _$actionInfo = _$_ComicsStoreBaseActionController.startAction(
+        name: '_ComicsStoreBase.setSearchText');
+    try {
+      return super.setSearchText(value);
+    } finally {
+      _$_ComicsStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic toggleIsSearching() {
+    final _$actionInfo = _$_ComicsStoreBaseActionController.startAction(
+        name: '_ComicsStoreBase.toggleIsSearching');
+    try {
+      return super.toggleIsSearching();
+    } finally {
+      _$_ComicsStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
 
   @override
   dynamic getComicsList() {
@@ -57,7 +109,9 @@ mixin _$ComicsStore on _ComicsStoreBase, Store {
   String toString() {
     return '''
 comicsModel: ${comicsModel},
-selectedIndex: ${selectedIndex}
+selectedIndex: ${selectedIndex},
+isSearching: ${isSearching},
+searchText: ${searchText}
     ''';
   }
 }

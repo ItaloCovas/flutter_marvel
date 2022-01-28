@@ -1,12 +1,13 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_marvel/api/comics_api.dart';
 import 'package:flutter_marvel/controller/comics_store.dart';
+import 'package:flutter_marvel/pages/characters_page.dart';
 import 'package:flutter_marvel/pages/comicsdetails_page.dart';
 import 'package:flutter_marvel/pages/home_page.dart';
 import 'package:flutter_marvel/pages/series_page.dart';
 import 'package:flutter_marvel/themes/theme.dart';
-import 'package:flutter_marvel/widgets/search.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:get_it/get_it.dart';
 
@@ -18,6 +19,7 @@ class ComicsPage extends StatefulWidget {
 
 class _ComicsPageState extends State<ComicsPage> {
   final comicsStore = GetIt.I.get<ComicsStore>();
+  final comicsApi = GetIt.I.get<ComicsApi>();
 
   @override
   void initState() {
@@ -45,46 +47,35 @@ class _ComicsPageState extends State<ComicsPage> {
           unselectedItemColor: titleColor,
           currentIndex: comicsStore.selectedIndex,
           onTap: (index) => comicsStore.selectedIndex = index,
-          items: const [
+          items: [
             BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.home,
-                ),
-                title: Text(
-                  "Home",
-                  style: TextStyle(
-                    fontFamily: "Marvel",
-                    fontWeight: FontWeight.w600,
-                    letterSpacing: 1,
-                    shadows: [
-                      Shadow(
-                        blurRadius: 6.0,
-                        color: Colors.black,
-                        offset: Offset(2.0, 2.0),
-                      ),
-                    ],
-                  ),
-                )),
+              icon: IconButton(
+                onPressed: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (_) => const CharactersPage()));
+                },
+                icon: const Icon(Icons.face),
+              ),
+              label: "Characters",
+            ),
             BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.live_tv_rounded,
-                ),
-                title: Text(
-                  "Series",
-                  style: TextStyle(
-                      fontFamily: "Marvel",
-                      fontWeight: FontWeight.w600,
-                      letterSpacing: 1),
-                )),
+              icon: IconButton(
+                onPressed: () {
+                  print('teste');
+                },
+                icon: const Icon(Icons.live_tv_rounded),
+              ),
+              label: "Movies",
+            ),
             BottomNavigationBarItem(
-                icon: Icon(Icons.movie_creation),
-                title: Text(
-                  "Movies",
-                  style: TextStyle(
-                      fontFamily: "Marvel",
-                      fontWeight: FontWeight.w600,
-                      letterSpacing: 1),
-                ))
+              icon: IconButton(
+                onPressed: () {
+                  print('teste');
+                },
+                icon: const Icon(Icons.movie_creation),
+              ),
+              label: "Series",
+            )
           ],
         );
       }),
@@ -92,33 +83,59 @@ class _ComicsPageState extends State<ComicsPage> {
         backgroundColor: secondaryBlack,
         centerTitle: true,
         elevation: 0,
-        title: Padding(
-          padding: const EdgeInsets.only(top: 5),
-          child: Text(
-            "Marvel Comics".toUpperCase(),
-            style: const TextStyle(
-              color: primaryButton,
-              fontFamily: 'Marvel',
-              fontWeight: FontWeight.w600,
-              letterSpacing: 3,
-              fontSize: 35,
-              shadows: [
-                Shadow(
-                  blurRadius: 6.0,
-                  color: Colors.black,
-                  offset: Offset(2.0, 2.0),
-                ),
-              ],
-            ),
-          ),
-        ),
+        title: Observer(builder: (_) {
+          return Padding(
+            padding: const EdgeInsets.only(top: 0),
+            child: comicsStore.isSearching
+                ? Container(
+                    height: 30,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: Colors.white,
+                    ),
+                    child: TextField(
+                      onSubmitted: (text) {
+                        comicsStore.setSearchText(text);
+                        comicsStore.getComicsList();
+                      },
+                      style: const TextStyle(
+                        color: Colors.black,
+                        fontSize: 14,
+                      ),
+                      cursorColor: Colors.black,
+                      decoration: const InputDecoration(
+                        hintStyle: TextStyle(color: Colors.black),
+                        contentPadding: EdgeInsets.only(bottom: 18, left: 10),
+                        focusColor: Colors.black,
+                        focusedBorder: InputBorder.none,
+                      ),
+                    ),
+                  )
+                : Text(
+                    "Marvel Comics".toUpperCase(),
+                    style: const TextStyle(
+                      color: primaryButton,
+                      fontFamily: 'Marvel',
+                      fontWeight: FontWeight.w600,
+                      letterSpacing: 3,
+                      fontSize: 35,
+                      shadows: [
+                        Shadow(
+                          blurRadius: 6.0,
+                          color: Colors.black,
+                          offset: Offset(2.0, 2.0),
+                        ),
+                      ],
+                    ),
+                  ),
+          );
+        }),
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 7),
             child: IconButton(
                 onPressed: () {
-                  Navigator.of(context)
-                      .push(MaterialPageRoute(builder: (_) => SearchWidget()));
+                  comicsStore.toggleIsSearching();
                 },
                 icon: const Icon(Icons.search)),
           )
@@ -160,9 +177,8 @@ class _ComicsPageState extends State<ComicsPage> {
                           (BuildContext context, int index, int pageViewIndex) {
                         var comics = comicsStore.comicsModel![index];
                         return Container(
-                          child: Image.network(comics.thumbnailPath +
-                              "." +
-                              comics.thumbnailExtension),
+                          child: Image.network(
+                              "${comics.thumbnail!.path}.${comics.thumbnail!.extension}"),
                         );
                       },
                     ),
@@ -174,7 +190,7 @@ class _ComicsPageState extends State<ComicsPage> {
                 }
               }),
             ),
-            Divider(
+            const Divider(
               height: 10,
             ),
             const SizedBox(
@@ -219,7 +235,7 @@ class _ComicsPageState extends State<ComicsPage> {
                                       child: Padding(
                                         padding: const EdgeInsets.only(left: 5),
                                         child: Text(
-                                          comics.title,
+                                          comics.title.toString(),
                                           style: const TextStyle(
                                               color: Colors.white,
                                               fontSize: 12,
@@ -239,9 +255,7 @@ class _ComicsPageState extends State<ComicsPage> {
                                           borderRadius:
                                               BorderRadius.circular(5)),
                                       child: Image.network(
-                                        comics.thumbnailPath +
-                                            "." +
-                                            comics.thumbnailExtension,
+                                        "${comics.thumbnail!.path}.${comics.thumbnail!.extension}",
                                         width: 110,
                                         height: 160,
                                         fit: BoxFit.cover,
@@ -259,7 +273,7 @@ class _ComicsPageState extends State<ComicsPage> {
                 );
               }
             }),
-            SizedBox(
+            const SizedBox(
               height: 25,
             )
           ],

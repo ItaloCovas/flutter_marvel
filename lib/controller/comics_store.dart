@@ -14,9 +14,25 @@ abstract class _ComicsStoreBase with Store {
   @observable
   int selectedIndex = 0;
 
+  @observable
+  bool isSearching = false;
+
+  @observable
+  String searchText = '';
+
+  @action
+  setSearchText(String value) {
+    searchText = value;
+  }
+
+  @action
+  toggleIsSearching() {
+    isSearching = !isSearching;
+  }
+
   @action
   getComicsList() {
-    api.getComics().then((comicsList) {
+    api.getComics(title: searchText).then((comicsList) {
       comicsModel = comicsList;
       print('comics list changed');
       print(comicsModel);
