@@ -16,9 +16,25 @@ abstract class _CharactersStoreBase with Store {
   @observable
   int selectedIndex = 0;
 
+  @observable
+  bool isSearching = false;
+
+  @observable
+  String searchText = '';
+
+  @action
+  setSearchText(String value) {
+    searchText = value;
+  }
+
+  @action
+  toggleIsSearching() {
+    isSearching = !isSearching;
+  }
+
   @action
   getCharactersList() {
-    api.getCharacters().then((charactersList) {
+    api.getCharacters(name: searchText).then((charactersList) {
       charactersModel = charactersList;
       print('comics list changed');
       print(charactersModel);

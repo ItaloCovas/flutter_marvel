@@ -14,9 +14,25 @@ abstract class _SeriesStoreBase with Store {
   @observable
   int selectedIndex = 0;
 
+  @observable
+  bool isSearching = false;
+
+  @observable
+  String searchText = '';
+
+  @action
+  setSearchText(String value) {
+    searchText = value;
+  }
+
+  @action
+  toggleIsSearching() {
+    isSearching = !isSearching;
+  }
+
   @action
   getSeriesList() {
-    api.getSeries().then((seriesList) {
+    api.getSeries(title: searchText).then((seriesList) {
       seriesModel = seriesList;
       print('comics list changed');
       print(seriesModel);

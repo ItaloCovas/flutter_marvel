@@ -39,8 +39,60 @@ mixin _$SeriesStore on _SeriesStoreBase, Store {
     });
   }
 
+  final _$isSearchingAtom = Atom(name: '_SeriesStoreBase.isSearching');
+
+  @override
+  bool get isSearching {
+    _$isSearchingAtom.reportRead();
+    return super.isSearching;
+  }
+
+  @override
+  set isSearching(bool value) {
+    _$isSearchingAtom.reportWrite(value, super.isSearching, () {
+      super.isSearching = value;
+    });
+  }
+
+  final _$searchTextAtom = Atom(name: '_SeriesStoreBase.searchText');
+
+  @override
+  String get searchText {
+    _$searchTextAtom.reportRead();
+    return super.searchText;
+  }
+
+  @override
+  set searchText(String value) {
+    _$searchTextAtom.reportWrite(value, super.searchText, () {
+      super.searchText = value;
+    });
+  }
+
   final _$_SeriesStoreBaseActionController =
       ActionController(name: '_SeriesStoreBase');
+
+  @override
+  dynamic setSearchText(String value) {
+    final _$actionInfo = _$_SeriesStoreBaseActionController.startAction(
+        name: '_SeriesStoreBase.setSearchText');
+    try {
+      return super.setSearchText(value);
+    } finally {
+      _$_SeriesStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic toggleIsSearching() {
+    final _$actionInfo = _$_SeriesStoreBaseActionController.startAction(
+        name: '_SeriesStoreBase.toggleIsSearching');
+    try {
+      return super.toggleIsSearching();
+    } finally {
+      _$_SeriesStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
 
   @override
   dynamic getSeriesList() {
@@ -57,7 +109,9 @@ mixin _$SeriesStore on _SeriesStoreBase, Store {
   String toString() {
     return '''
 seriesModel: ${seriesModel},
-selectedIndex: ${selectedIndex}
+selectedIndex: ${selectedIndex},
+isSearching: ${isSearching},
+searchText: ${searchText}
     ''';
   }
 }

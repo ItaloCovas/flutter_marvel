@@ -9,9 +9,15 @@ class CharactersApi {
   var dio = Dio();
   static const url =
       'https://gateway.marvel.com/v1/public/characters?ts=2201251159&apikey=1a5c3435222033e450f8a33cab175554&hash=3ea10f29ca253e31e0b2998c76f2fe67';
-  Future<ObservableList<CharactersModel>?> getCharacters() async {
+  Future<ObservableList<CharactersModel>?> getCharacters({String? name}) async {
     try {
-      Response response = await dio.get(url);
+      String urlName = url;
+
+      if (name != '') {
+        urlName = '$url&name=$name';
+      }
+
+      Response response = await dio.get(urlName);
 
       List<CharactersModel> list = [];
       var result = response.data;

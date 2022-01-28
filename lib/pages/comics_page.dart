@@ -19,7 +19,6 @@ class ComicsPage extends StatefulWidget {
 
 class _ComicsPageState extends State<ComicsPage> {
   final comicsStore = GetIt.I.get<ComicsStore>();
-  final comicsApi = GetIt.I.get<ComicsApi>();
 
   @override
   void initState() {

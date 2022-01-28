@@ -76,30 +76,61 @@ class _SeriesPageState extends State<SeriesPage> {
         backgroundColor: secondaryBlack,
         centerTitle: true,
         elevation: 0,
-        title: Padding(
-          padding: const EdgeInsets.only(top: 5),
-          child: Text(
-            "Marvel Series".toUpperCase(),
-            style: const TextStyle(
-              color: primaryButton,
-              fontFamily: 'Marvel',
-              fontWeight: FontWeight.w600,
-              letterSpacing: 3,
-              fontSize: 40,
-              shadows: [
-                Shadow(
-                  blurRadius: 6.0,
-                  color: Colors.black,
-                  offset: Offset(2.0, 2.0),
-                ),
-              ],
-            ),
-          ),
-        ),
+        title: Observer(builder: (_) {
+          return Padding(
+            padding: const EdgeInsets.only(top: 5),
+            child: seriesStore.isSearching
+                ? Container(
+                    height: 30,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: Colors.white,
+                    ),
+                    child: TextField(
+                      onSubmitted: (text) {
+                        seriesStore.setSearchText(text);
+                        seriesStore.getSeriesList();
+                      },
+                      style: const TextStyle(
+                        color: Colors.black,
+                        fontSize: 14,
+                      ),
+                      cursorColor: Colors.black,
+                      decoration: const InputDecoration(
+                        hintStyle: TextStyle(color: Colors.black),
+                        contentPadding: EdgeInsets.only(bottom: 18, left: 10),
+                        focusColor: Colors.black,
+                        focusedBorder: InputBorder.none,
+                      ),
+                    ),
+                  )
+                : Text(
+                    "Marvel Series".toUpperCase(),
+                    style: const TextStyle(
+                      color: primaryButton,
+                      fontFamily: 'Marvel',
+                      fontWeight: FontWeight.w600,
+                      letterSpacing: 3,
+                      fontSize: 40,
+                      shadows: [
+                        Shadow(
+                          blurRadius: 6.0,
+                          color: Colors.black,
+                          offset: Offset(2.0, 2.0),
+                        ),
+                      ],
+                    ),
+                  ),
+          );
+        }),
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 7),
-            child: IconButton(onPressed: () {}, icon: const Icon(Icons.search)),
+            child: IconButton(
+                onPressed: () {
+                  seriesStore.toggleIsSearching();
+                },
+                icon: const Icon(Icons.search)),
           )
         ],
         leading: GestureDetector(
@@ -167,9 +198,9 @@ class _SeriesPageState extends State<SeriesPage> {
                         gridDelegate:
                             const SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 2,
-                          crossAxisSpacing: 3,
-                          mainAxisSpacing: 12,
-                          childAspectRatio: 0.75,
+                          crossAxisSpacing: 0,
+                          mainAxisSpacing: 7,
+                          childAspectRatio: 0.9,
                         ),
                         itemCount: seriesStore.seriesModel?.length,
                         itemBuilder: (ctx, index) {
@@ -182,8 +213,8 @@ class _SeriesPageState extends State<SeriesPage> {
                                 margin:
                                     const EdgeInsets.only(left: 5, right: 5),
                                 decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
+                                    borderRadius: BorderRadius.circular(10),
+                                    color: Colors.red),
                                 child: Column(
                                   children: [
                                     const SizedBox(

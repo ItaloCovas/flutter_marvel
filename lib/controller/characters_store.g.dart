@@ -40,8 +40,60 @@ mixin _$CharactersStore on _CharactersStoreBase, Store {
     });
   }
 
+  final _$isSearchingAtom = Atom(name: '_CharactersStoreBase.isSearching');
+
+  @override
+  bool get isSearching {
+    _$isSearchingAtom.reportRead();
+    return super.isSearching;
+  }
+
+  @override
+  set isSearching(bool value) {
+    _$isSearchingAtom.reportWrite(value, super.isSearching, () {
+      super.isSearching = value;
+    });
+  }
+
+  final _$searchTextAtom = Atom(name: '_CharactersStoreBase.searchText');
+
+  @override
+  String get searchText {
+    _$searchTextAtom.reportRead();
+    return super.searchText;
+  }
+
+  @override
+  set searchText(String value) {
+    _$searchTextAtom.reportWrite(value, super.searchText, () {
+      super.searchText = value;
+    });
+  }
+
   final _$_CharactersStoreBaseActionController =
       ActionController(name: '_CharactersStoreBase');
+
+  @override
+  dynamic setSearchText(String value) {
+    final _$actionInfo = _$_CharactersStoreBaseActionController.startAction(
+        name: '_CharactersStoreBase.setSearchText');
+    try {
+      return super.setSearchText(value);
+    } finally {
+      _$_CharactersStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic toggleIsSearching() {
+    final _$actionInfo = _$_CharactersStoreBaseActionController.startAction(
+        name: '_CharactersStoreBase.toggleIsSearching');
+    try {
+      return super.toggleIsSearching();
+    } finally {
+      _$_CharactersStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
 
   @override
   dynamic getCharactersList() {
@@ -58,7 +110,9 @@ mixin _$CharactersStore on _CharactersStoreBase, Store {
   String toString() {
     return '''
 charactersModel: ${charactersModel},
-selectedIndex: ${selectedIndex}
+selectedIndex: ${selectedIndex},
+isSearching: ${isSearching},
+searchText: ${searchText}
     ''';
   }
 }

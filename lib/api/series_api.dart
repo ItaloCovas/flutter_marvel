@@ -6,11 +6,17 @@ import 'package:mobx/mobx.dart';
 
 class SeriesApi {
   var dio = Dio();
-  static const url =
+  String url =
       'https://gateway.marvel.com/v1/public/series?ts=2201251159&apikey=1a5c3435222033e450f8a33cab175554&hash=3ea10f29ca253e31e0b2998c76f2fe67';
-  Future<ObservableList<SeriesModel>?> getSeries() async {
+  Future<ObservableList<SeriesModel>?> getSeries({String? title}) async {
     try {
-      Response response = await dio.get(url);
+      String urlTitle = url;
+
+      if (title != '') {
+        urlTitle = '$url&title=$title';
+      }
+
+      Response response = await dio.get(urlTitle);
 
       List<SeriesModel> list = [];
       var result = response.data;

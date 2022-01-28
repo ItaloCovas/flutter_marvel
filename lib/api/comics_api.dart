@@ -7,8 +7,6 @@ class ComicsApi {
   String url =
       'https://gateway.marvel.com/v1/public/comics?ts=2201251159&apikey=1a5c3435222033e450f8a33cab175554&hash=3ea10f29ca253e31e0b2998c76f2fe67';
 
-  ComicsModel comicsModel = ComicsModel();
-
   Future<ObservableList<ComicsModel>?> getComics({String? title}) async {
     try {
       String urlTitle = url;
