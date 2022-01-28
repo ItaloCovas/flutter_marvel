@@ -28,47 +28,6 @@ class _CharactersPageState extends State<CharactersPage> {
     return Scaffold(
       resizeToAvoidBottomInset: true,
       backgroundColor: backgroundColor,
-      bottomNavigationBar: Observer(builder: (_) {
-        return BottomNavigationBar(
-          backgroundColor: secondaryBlack.withOpacity(0.5),
-          showSelectedLabels: true,
-          showUnselectedLabels: true,
-          selectedItemColor: primaryButton,
-          unselectedItemColor: titleColor,
-          currentIndex: charactersStore.selectedIndex,
-          onTap: (index) => charactersStore.selectedIndex = index,
-          items: [
-            BottomNavigationBarItem(
-              icon: IconButton(
-                onPressed: () {
-                  print('teste');
-                },
-                icon: const Icon(Icons.live_tv_rounded),
-              ),
-              label: "Series",
-            ),
-            BottomNavigationBarItem(
-              icon: IconButton(
-                onPressed: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (_) => const CharactersPage()));
-                },
-                icon: const Icon(Icons.face),
-              ),
-              label: "Characters",
-            ),
-            BottomNavigationBarItem(
-              icon: IconButton(
-                onPressed: () {
-                  print('teste');
-                },
-                icon: const Icon(Icons.schedule),
-              ),
-              label: "Events",
-            )
-          ],
-        );
-      }),
       appBar: AppBar(
         backgroundColor: secondaryBlack,
         centerTitle: true,

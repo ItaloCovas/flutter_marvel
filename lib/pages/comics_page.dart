@@ -217,7 +217,9 @@ class _ComicsPageState extends State<ComicsPage> {
                           return GestureDetector(
                             onTap: () {
                               Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (_) => ComicsDetailsPage()));
+                                  builder: (contex) => ComicsDetailsPage(
+                                        index: index,
+                                      )));
                             },
                             child: Container(
                                 margin:
