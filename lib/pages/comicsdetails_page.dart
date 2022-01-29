@@ -6,13 +6,16 @@ import 'package:get_it/get_it.dart';
 
 class ComicsDetailsPage extends StatefulWidget {
   final int index;
-  ComicsDetailsPage({
+
+  final int heroTag;
+  const ComicsDetailsPage({
     Key? key,
     required this.index,
+    required this.heroTag,
   }) : super(key: key);
 
   @override
-  State<ComicsDetailsPage> createState() => _ComicsDetailsPageState(this.index);
+  State<ComicsDetailsPage> createState() => _ComicsDetailsPageState(index);
 }
 
 class _ComicsDetailsPageState extends State<ComicsDetailsPage> {
@@ -91,11 +94,14 @@ class _ComicsDetailsPageState extends State<ComicsDetailsPage> {
                     ])),
               )),
               Positioned(
-                  top: 200,
-                  child: Image.network(
-                    "${comicsStore.comicsModel![index].thumbnail!.path}.${comicsStore.comicsModel![index].thumbnail!.extension}",
-                    width: 170,
-                    height: 180,
+                  top: 190,
+                  child: Hero(
+                    tag: widget.heroTag,
+                    child: Image.network(
+                      "${comicsStore.comicsModel![index].thumbnail!.path}.${comicsStore.comicsModel![index].thumbnail!.extension}",
+                      width: 170,
+                      height: 180,
+                    ),
                   ))
             ],
           );

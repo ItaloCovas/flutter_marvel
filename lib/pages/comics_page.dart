@@ -214,56 +214,61 @@ class _ComicsPageState extends State<ComicsPage> {
                         itemCount: comicsStore.comicsModel?.length,
                         itemBuilder: (ctx, index) {
                           var comics = comicsStore.comicsModel![index];
-                          return GestureDetector(
-                            onTap: () {
-                              Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (contex) => ComicsDetailsPage(
-                                        index: index,
-                                      )));
-                            },
-                            child: Container(
-                                margin:
-                                    const EdgeInsets.only(left: 5, right: 5),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                child: Column(
-                                  children: [
-                                    const SizedBox(
-                                      height: 8,
-                                    ),
-                                    Center(
-                                      child: Padding(
-                                        padding: const EdgeInsets.only(left: 5),
-                                        child: Text(
-                                          comics.title.toString(),
-                                          style: const TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 12,
-                                              fontFamily: "Marvel",
-                                              letterSpacing: 0.5),
+                          return Hero(
+                            tag: index,
+                            child: GestureDetector(
+                              onTap: () {
+                                Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (_) => ComicsDetailsPage(
+                                          index: index,
+                                          heroTag: index,
+                                        )));
+                              },
+                              child: Container(
+                                  margin:
+                                      const EdgeInsets.only(left: 5, right: 5),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  child: Column(
+                                    children: [
+                                      const SizedBox(
+                                        height: 8,
+                                      ),
+                                      Center(
+                                        child: Padding(
+                                          padding:
+                                              const EdgeInsets.only(left: 5),
+                                          child: Text(
+                                            comics.title.toString(),
+                                            style: const TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 12,
+                                                fontFamily: "Marvel",
+                                                letterSpacing: 0.5),
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                    const SizedBox(
-                                      height: 15,
-                                    ),
-                                    Container(
-                                      decoration: BoxDecoration(
-                                          border: Border.all(
-                                              color: Colors.grey.shade400,
-                                              width: 2),
-                                          borderRadius:
-                                              BorderRadius.circular(5)),
-                                      child: Image.network(
-                                        "${comics.thumbnail!.path}.${comics.thumbnail!.extension}",
-                                        width: 110,
-                                        height: 160,
-                                        fit: BoxFit.cover,
+                                      const SizedBox(
+                                        height: 15,
                                       ),
-                                    ),
-                                  ],
-                                )),
+                                      Container(
+                                        decoration: BoxDecoration(
+                                            border: Border.all(
+                                                color: Colors.grey.shade400,
+                                                width: 2),
+                                            borderRadius:
+                                                BorderRadius.circular(5)),
+                                        child: Image.network(
+                                          "${comics.thumbnail!.path}.${comics.thumbnail!.extension}",
+                                          width: 110,
+                                          height: 160,
+                                          fit: BoxFit.cover,
+                                        ),
+                                      ),
+                                    ],
+                                  )),
+                            ),
                           );
                         }),
                   ),
