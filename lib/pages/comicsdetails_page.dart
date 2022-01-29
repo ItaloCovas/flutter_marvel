@@ -97,10 +97,13 @@ class _ComicsDetailsPageState extends State<ComicsDetailsPage> {
                   top: 190,
                   child: Hero(
                     tag: widget.heroTag,
-                    child: Image.network(
-                      "${comicsStore.comicsModel![index].thumbnail!.path}.${comicsStore.comicsModel![index].thumbnail!.extension}",
-                      width: 170,
-                      height: 180,
+                    child: Material(
+                      type: MaterialType.transparency,
+                      child: Image.network(
+                        "${comicsStore.comicsModel![index].thumbnail!.path}.${comicsStore.comicsModel![index].thumbnail!.extension}",
+                        width: 170,
+                        height: 180,
+                      ),
                     ),
                   ))
             ],
