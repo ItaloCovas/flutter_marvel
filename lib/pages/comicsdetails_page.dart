@@ -30,34 +30,33 @@ class _ComicsDetailsPageState extends State<ComicsDetailsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: backgroundColor,
-      appBar: AppBar(
-        centerTitle: true,
-        backgroundColor: secondaryBlack,
-        elevation: 0,
-        title: Padding(
-          padding: const EdgeInsets.only(left: 7),
-          child: Text(
-            comicsStore.comicsModel![index].title.toString().toUpperCase(),
-            style: const TextStyle(
-              color: primaryButton,
-              fontFamily: 'Marvel',
-              fontWeight: FontWeight.w600,
-              letterSpacing: 3,
-              fontSize: 28,
-              shadows: [
-                Shadow(
-                  blurRadius: 6.0,
-                  color: Colors.black,
-                  offset: Offset(2.0, 2.0),
-                ),
-              ],
+        backgroundColor: backgroundColor,
+        appBar: AppBar(
+          centerTitle: true,
+          backgroundColor: secondaryBlack,
+          elevation: 0,
+          title: Padding(
+            padding: const EdgeInsets.only(left: 7),
+            child: Text(
+              comicsStore.comicsModel![index].title.toString().toUpperCase(),
+              style: const TextStyle(
+                color: primaryButton,
+                fontFamily: 'Marvel',
+                fontWeight: FontWeight.w600,
+                letterSpacing: 3,
+                fontSize: 28,
+                shadows: [
+                  Shadow(
+                    blurRadius: 6.0,
+                    color: Colors.black,
+                    offset: Offset(2.0, 2.0),
+                  ),
+                ],
+              ),
             ),
           ),
         ),
-      ),
-      body: Observer(builder: (_) {
-        if (comicsStore.comicsModel != null) {
+        body: Observer(builder: (_) {
           return Stack(
             children: [
               Image.network(
@@ -81,19 +80,25 @@ class _ComicsDetailsPageState extends State<ComicsDetailsPage> {
                       backgroundColor.withOpacity(1),
                       backgroundColor.withOpacity(1),
                       backgroundColor.withOpacity(1),
-                      backgroundColor.withOpacity(0),
+                      backgroundColor.withOpacity(1),
+                      backgroundColor.withOpacity(1),
+                      backgroundColor.withOpacity(1),
+                      backgroundColor.withOpacity(0.4),
                       backgroundColor.withOpacity(0),
                       backgroundColor.withOpacity(0),
                       backgroundColor.withOpacity(0),
                       backgroundColor.withOpacity(0),
                     ])),
               )),
+              Positioned(
+                  top: 200,
+                  child: Image.network(
+                    "${comicsStore.comicsModel![index].thumbnail!.path}.${comicsStore.comicsModel![index].thumbnail!.extension}",
+                    width: 170,
+                    height: 180,
+                  ))
             ],
           );
-        } else {
-          return Center();
-        }
-      }),
-    );
+        }));
   }
 }
