@@ -145,29 +145,32 @@ class _ComicsDetailsPageState extends State<ComicsDetailsPage> {
                   padding: const EdgeInsets.only(right: 60, left: 40),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: const [
-                      Text(
+                    children: [
+                      const Text(
                         "Action / Adventure / Fantasy / Sci-Fi",
                         style: TextStyle(
                           color: Colors.white,
-                          fontSize: 16,
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
-                      Text("Synopsis",
+                      const Text("Synopsis",
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 15,
+                            fontWeight: FontWeight.bold,
                           )),
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
-                      Text("loremipsumkasdkasodqwokdqasxijoheuqw",
-                          style: TextStyle(
+                      Text(
+                          "${comicsStore.comicsModel![index].description != '' && comicsStore.comicsModel![index].description != '#N/A' ? comicsStore.comicsModel![index].description : comicsStore.comicsModel![index].textObjects![0].text}",
+                          style: const TextStyle(
                             color: textSecondaryColor,
-                            fontSize: 14,
+                            fontSize: 16,
                           )),
                     ],
                   ),
