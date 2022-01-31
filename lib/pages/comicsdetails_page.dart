@@ -192,13 +192,8 @@ class _ComicsDetailsPageState extends State<ComicsDetailsPage> {
                       ),
                       Text(
                           "${comicsStore.comicsModel![index].description != '#N/A' ? comicsStore.comicsModel![index].description : comicsStore.comicsModel![index].textObjects![0].text}",
-<<<<<<< HEAD
-                          style: TextStyle(
-                            color: Colors.grey.shade500,
-=======
                           style: const TextStyle(
                             color: textSecondaryColor,
->>>>>>> 6a0db8d095821aa825c6fb65459d44a2467421fb
                             fontSize: 16,
                           )),
                     ],
