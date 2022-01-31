@@ -118,54 +118,59 @@ class _CharacterDetailsPage extends State<CharacterDetailsPage> {
                         ),
                       ),
                       const SizedBox(width: 10),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(
-                            children: [
-                              const Icon(
-                                Icons.star_rounded,
-                                color: starColor,
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(right: 20),
-                                child:
-                                    Text("  " + randomNumber.toStringAsFixed(2),
-                                        style: const TextStyle(
-                                          color: titleColor,
-                                        )),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(
-                            height: 25,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(right: 8),
-                            child: Text(
-                              "Stories: " +
-                                  charactersStore.charactersModel![index]
-                                      .stories!.items![0].name
-                                      .toString(),
-                              style: TextStyle(
-                                  color: titleColor, fontFamily: "Marvel"),
+                      Padding(
+                        padding: const EdgeInsets.only(right: 40, left: 20),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              children: [
+                                const Icon(
+                                  Icons.star_rounded,
+                                  color: starColor,
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(right: 20),
+                                  child: Text(
+                                      "  " + randomNumber.toStringAsFixed(2),
+                                      style: const TextStyle(
+                                        color: titleColor,
+                                      )),
+                                ),
+                              ],
                             ),
-                          ),
-                          const SizedBox(
-                            height: 20,
-                          ),
-                          Text(
-                            "Series: " +
-                                charactersStore.charactersModel![index].series!
-                                    .items![0].name
-                                    .toString(),
-                            style: const TextStyle(
-                                color: titleColor, fontFamily: "Marvel"),
-                          ),
-                          const SizedBox(
-                            height: 25,
-                          ),
-                        ],
+                            const SizedBox(
+                              height: 25,
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(right: 8),
+                              child: Text(
+                                "Stories: " +
+                                    charactersStore.charactersModel![index]
+                                        .stories!.items![0].name
+                                        .toString(),
+                                style: TextStyle(
+                                  color: titleColor,
+                                ),
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 20,
+                            ),
+                            Text(
+                              "Events: " +
+                                  charactersStore.charactersModel![index]
+                                      .events!.items![0].name
+                                      .toString(),
+                              style: const TextStyle(
+                                color: titleColor,
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 25,
+                            ),
+                          ],
+                        ),
                       ),
                     ],
                   ),
@@ -200,6 +205,42 @@ class _CharacterDetailsPage extends State<CharacterDetailsPage> {
                       ),
                       Text(
                           "${charactersStore.charactersModel![index].description}",
+                          style: TextStyle(
+                            color: Colors.grey.shade400,
+                            fontSize: 16,
+                          )),
+                      SizedBox(
+                        height: 15,
+                      ),
+                      const Text("Series",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 15,
+                            fontWeight: FontWeight.bold,
+                          )),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Text(
+                          "${charactersStore.charactersModel![index].series!.items![0].name}",
+                          style: TextStyle(
+                            color: Colors.grey.shade400,
+                            fontSize: 16,
+                          )),
+                      SizedBox(
+                        height: 15,
+                      ),
+                      const Text("Comics",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 15,
+                            fontWeight: FontWeight.bold,
+                          )),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Text(
+                          "${charactersStore.charactersModel![index].comics!.items![0].name}",
                           style: TextStyle(
                             color: Colors.grey.shade400,
                             fontSize: 16,
