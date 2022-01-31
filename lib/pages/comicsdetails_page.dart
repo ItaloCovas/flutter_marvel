@@ -167,7 +167,7 @@ class _ComicsDetailsPageState extends State<ComicsDetailsPage> {
                         height: 10,
                       ),
                       Text(
-                          "${comicsStore.comicsModel![index].description != '' && comicsStore.comicsModel![index].description != '#N/A' ? comicsStore.comicsModel![index].description : comicsStore.comicsModel![index].textObjects![0].text}",
+                          "${comicsStore.comicsModel![index].description != '#N/A' ? comicsStore.comicsModel![index].description : comicsStore.comicsModel![index].textObjects![0].text}",
                           style: const TextStyle(
                             color: textSecondaryColor,
                             fontSize: 16,
