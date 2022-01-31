@@ -59,7 +59,9 @@ class ComicsModel {
     title = json['title'];
     issueNumber = json['issueNumber'];
     variantDescription = json['variantDescription'];
-    description = json['description'] ?? 'Description not given!';
+    description = json['description'] != null && json['description'] != ''
+        ? json['description']
+        : 'Description not given!';
     modified = json['modified'];
     isbn = json['isbn'];
     upc = json['upc'];
