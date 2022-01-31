@@ -124,38 +124,42 @@ class _ComicsDetailsPageState extends State<ComicsDetailsPage> {
                                 Icons.star_rounded,
                                 color: starColor,
                               ),
-                              Text(" " + randomNumber.toStringAsFixed(2),
+                              Text("  " + randomNumber.toStringAsFixed(2),
                                   style: const TextStyle(
-                                    color: Colors.white,
+                                    color: titleColor,
                                   )),
                             ],
                           ),
                           const SizedBox(
                             height: 25,
                           ),
-                          const Text("Available in: ",
+                          const Text(" Available in: ",
                               textAlign: TextAlign.left,
                               style: TextStyle(
-                                color: titleColor,
-                              )),
+                                  color: titleColor,
+                                  fontFamily: "Marvel",
+                                  letterSpacing: 1)),
                           const SizedBox(height: 15),
                           Row(
                             children: [
-                              Container(
-                                width: 50,
-                                height: 30,
-                                decoration: BoxDecoration(
-                                  color: Colors.grey.shade700,
-                                  border:
-                                      Border.all(color: Colors.white, width: 1),
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                child: const Center(
-                                  child: Text("720p",
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 12,
-                                      )),
+                              Padding(
+                                padding: const EdgeInsets.only(left: 2),
+                                child: Container(
+                                  width: 50,
+                                  height: 30,
+                                  decoration: BoxDecoration(
+                                    color: Colors.grey.shade700,
+                                    border: Border.all(
+                                        color: Colors.white, width: 1),
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  child: const Center(
+                                    child: Text("720p",
+                                        style: TextStyle(
+                                            color: titleColor,
+                                            fontSize: 12,
+                                            fontFamily: "Marvel")),
+                                  ),
                                 ),
                               ),
                               const SizedBox(
@@ -173,7 +177,7 @@ class _ComicsDetailsPageState extends State<ComicsDetailsPage> {
                                 child: const Center(
                                   child: Text("1080p",
                                       style: TextStyle(
-                                        color: Colors.white,
+                                        color: titleColor,
                                         fontSize: 12,
                                       )),
                                 ),
@@ -181,10 +185,44 @@ class _ComicsDetailsPageState extends State<ComicsDetailsPage> {
                             ],
                           ),
                         ],
-                      )
+                      ),
                     ],
                   ),
                 ),
+                SizedBox(
+                  height: 30,
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: const [
+                      Text(
+                        "Action / Adventure / Fantasy / Sci-Fi",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 16,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Text("Synopsis",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 15,
+                          )),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Text("loremipsumkasdkasodqwokdqasxijoheuqw",
+                          style: TextStyle(
+                            color: textSecondaryColor,
+                            fontSize: 14,
+                          )),
+                    ],
+                  ),
+                )
               ],
             ),
           );
