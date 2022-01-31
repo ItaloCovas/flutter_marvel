@@ -124,11 +124,35 @@ class _ComicsDetailsPageState extends State<ComicsDetailsPage> {
                                 Icons.star_rounded,
                                 color: starColor,
                               ),
-                              Text("  " + randomNumber.toStringAsFixed(2),
-                                  style: const TextStyle(
-                                    color: titleColor,
-                                  )),
+                              Padding(
+                                padding: const EdgeInsets.only(right: 15),
+                                child:
+                                    Text("  " + randomNumber.toStringAsFixed(2),
+                                        style: const TextStyle(
+                                          color: titleColor,
+                                        )),
+                              ),
                             ],
+                          ),
+                          SizedBox(
+                            height: 25,
+                          ),
+                          Text(
+                            "Creator: " +
+                                comicsStore.comicsModel![index].creators!
+                                    .items![0].name
+                                    .toString(),
+                            style: TextStyle(color: titleColor),
+                          ),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          Text(
+                            "Role: " +
+                                comicsStore.comicsModel![index].creators!
+                                    .items![0].role
+                                    .toString(),
+                            style: TextStyle(color: titleColor),
                           ),
                           const SizedBox(
                             height: 25,
@@ -145,29 +169,32 @@ class _ComicsDetailsPageState extends State<ComicsDetailsPage> {
                   padding: const EdgeInsets.only(right: 60, left: 40),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: const [
-                      Text(
+                    children: [
+                      const Text(
                         "Action / Adventure / Fantasy / Sci-Fi",
                         style: TextStyle(
                           color: Colors.white,
-                          fontSize: 16,
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
-                      Text("Synopsis",
+                      const Text("Synopsis",
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 15,
+                            fontWeight: FontWeight.bold,
                           )),
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
-                      Text("loremipsumkasdkasodqwokdqasxijoheuqw",
+                      Text(
+                          "${comicsStore.comicsModel![index].description != '#N/A' ? comicsStore.comicsModel![index].description : comicsStore.comicsModel![index].textObjects![0].text}",
                           style: TextStyle(
-                            color: textSecondaryColor,
-                            fontSize: 14,
+                            color: Colors.grey.shade500,
+                            fontSize: 16,
                           )),
                     ],
                   ),
