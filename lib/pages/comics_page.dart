@@ -208,8 +208,8 @@ class _ComicsPageState extends State<ComicsPage> {
                             const SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 2,
                           crossAxisSpacing: 3,
-                          mainAxisSpacing: 5,
-                          childAspectRatio: 0.75,
+                          mainAxisSpacing: 8,
+                          childAspectRatio: 0.65,
                         ),
                         itemCount: comicsStore.comicsModel?.length,
                         itemBuilder: (ctx, index) {
