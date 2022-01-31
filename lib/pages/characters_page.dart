@@ -1,6 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_marvel/controller/characters_store.dart';
+import 'package:flutter_marvel/pages/charactersdetails_page.dart';
 import 'package:flutter_marvel/pages/home_page.dart';
 import 'package:flutter_marvel/themes/theme.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -18,7 +19,6 @@ class _CharactersPageState extends State<CharactersPage> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     charactersStore.getCharactersList();
   }
@@ -165,14 +165,17 @@ class _CharactersPageState extends State<CharactersPage> {
                               charactersStore.charactersModel![index];
                           return GestureDetector(
                             onTap: () {
-                              print('click');
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (_) => CharacterDetailsPage(
+                                        index: index,
+                                        heroTag: index,
+                                      )));
                             },
                             child: Container(
                                 margin:
                                     const EdgeInsets.only(left: 5, right: 5),
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(10),
-                                  color: Colors.red,
                                 ),
                                 child: Column(
                                   children: [
@@ -205,7 +208,7 @@ class _CharactersPageState extends State<CharactersPage> {
                                       child: Image.network(
                                         "${characters.thumbnail!.path}.${characters.thumbnail!.extension}",
                                         width: 110,
-                                        height: 160,
+                                        height: 140,
                                         fit: BoxFit.cover,
                                       ),
                                     ),

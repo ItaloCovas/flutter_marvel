@@ -187,6 +187,9 @@ class _SeriesDetailsPageState extends State<SeriesDetailsPage> {
                           color: textSecondaryColor,
                           fontSize: 16,
                         )),
+                    SizedBox(
+                      height: 25,
+                    )
                   ],
                 ),
               ),

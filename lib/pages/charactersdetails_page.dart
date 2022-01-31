@@ -1,35 +1,36 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_marvel/controller/comics_store.dart';
+import 'package:flutter_marvel/controller/characters_store.dart';
 import 'package:flutter_marvel/themes/theme.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:get_it/get_it.dart';
 
-class ComicsDetailsPage extends StatefulWidget {
+class CharacterDetailsPage extends StatefulWidget {
   final int index;
 
   final int heroTag;
-  const ComicsDetailsPage({
+  const CharacterDetailsPage({
     Key? key,
     required this.index,
     required this.heroTag,
   }) : super(key: key);
 
   @override
-  State<ComicsDetailsPage> createState() => _ComicsDetailsPageState(index);
+  State<CharacterDetailsPage> createState() => _CharacterDetailsPage(index);
 }
 
-class _ComicsDetailsPageState extends State<ComicsDetailsPage> {
-  final comicsStore = GetIt.I.get<ComicsStore>();
+class _CharacterDetailsPage extends State<CharacterDetailsPage> {
   final int index;
 
-  _ComicsDetailsPageState(this.index);
+  _CharacterDetailsPage(this.index);
+
+  final charactersStore = GetIt.I.get<CharactersStore>();
 
   @override
   void initState() {
     super.initState();
-    comicsStore.getComicsList();
+    charactersStore.getCharactersList();
   }
 
   @override
@@ -50,7 +51,9 @@ class _ComicsDetailsPageState extends State<ComicsDetailsPage> {
           title: Padding(
             padding: const EdgeInsets.only(left: 7),
             child: Text(
-              comicsStore.comicsModel![index].title.toString().toUpperCase(),
+              charactersStore.charactersModel![index].name
+                  .toString()
+                  .toUpperCase(),
               style: const TextStyle(
                 color: primaryButton,
                 fontFamily: 'Marvel',
@@ -86,14 +89,14 @@ class _ComicsDetailsPageState extends State<ComicsDetailsPage> {
                   },
                   blendMode: BlendMode.dstIn,
                   child: Image.network(
-                    "${comicsStore.comicsModel![index].thumbnail!.path}.${comicsStore.comicsModel![index].thumbnail!.extension}",
+                    "${charactersStore.charactersModel![index].thumbnail!.path}.${charactersStore.charactersModel![index].thumbnail!.extension}",
                     fit: BoxFit.fitWidth,
                     width: double.infinity,
                     height: 300,
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(left: 40),
+                  padding: const EdgeInsets.only(left: 20),
                   child: Row(
                     children: [
                       Hero(
@@ -106,7 +109,7 @@ class _ComicsDetailsPageState extends State<ComicsDetailsPage> {
                                   width: 2, color: Colors.grey.shade400),
                             ),
                             child: Image.network(
-                              "${comicsStore.comicsModel![index].thumbnail!.path}.${comicsStore.comicsModel![index].thumbnail!.extension}",
+                              "${charactersStore.charactersModel![index].thumbnail!.path}.${charactersStore.charactersModel![index].thumbnail!.extension}",
                               width: 120,
                               height: 180,
                               fit: BoxFit.cover,
@@ -114,7 +117,7 @@ class _ComicsDetailsPageState extends State<ComicsDetailsPage> {
                           ),
                         ),
                       ),
-                      const SizedBox(width: 15),
+                      const SizedBox(width: 10),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -137,22 +140,27 @@ class _ComicsDetailsPageState extends State<ComicsDetailsPage> {
                           const SizedBox(
                             height: 25,
                           ),
-                          Text(
-                            "Creator: " +
-                                comicsStore.comicsModel![index].creators!
-                                    .items![0].name
-                                    .toString(),
-                            style: TextStyle(color: titleColor),
+                          Padding(
+                            padding: const EdgeInsets.only(right: 8),
+                            child: Text(
+                              "Stories: " +
+                                  charactersStore.charactersModel![index]
+                                      .stories!.items![0].name
+                                      .toString(),
+                              style: TextStyle(
+                                  color: titleColor, fontFamily: "Marvel"),
+                            ),
                           ),
                           const SizedBox(
                             height: 20,
                           ),
                           Text(
-                            "Role: " +
-                                comicsStore.comicsModel![index].creators!
-                                    .items![0].role
+                            "Series: " +
+                                charactersStore.charactersModel![index].series!
+                                    .items![0].name
                                     .toString(),
-                            style: const TextStyle(color: titleColor),
+                            style: const TextStyle(
+                                color: titleColor, fontFamily: "Marvel"),
                           ),
                           const SizedBox(
                             height: 25,
@@ -166,7 +174,7 @@ class _ComicsDetailsPageState extends State<ComicsDetailsPage> {
                   height: 30,
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(right: 60, left: 40),
+                  padding: const EdgeInsets.only(right: 60, left: 20),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -188,14 +196,17 @@ class _ComicsDetailsPageState extends State<ComicsDetailsPage> {
                             fontWeight: FontWeight.bold,
                           )),
                       const SizedBox(
-                        height: 10,
+                        height: 15,
                       ),
                       Text(
-                          "${comicsStore.comicsModel![index].description != '#N/A' ? comicsStore.comicsModel![index].description : comicsStore.comicsModel![index].textObjects![0].text}",
+                          "${charactersStore.charactersModel![index].description}",
                           style: TextStyle(
                             color: Colors.grey.shade400,
                             fontSize: 16,
                           )),
+                      SizedBox(
+                        height: 25,
+                      )
                     ],
                   ),
                 ),

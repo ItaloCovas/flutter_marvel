@@ -1,12 +1,12 @@
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
-import 'package:flutter_marvel/api/comics_api.dart';
+
 import 'package:flutter_marvel/controller/comics_store.dart';
 import 'package:flutter_marvel/pages/characters_page.dart';
 import 'package:flutter_marvel/pages/comicsdetails_page.dart';
 import 'package:flutter_marvel/pages/home_page.dart';
-import 'package:flutter_marvel/pages/series_page.dart';
+
 import 'package:flutter_marvel/themes/theme.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:get_it/get_it.dart';
