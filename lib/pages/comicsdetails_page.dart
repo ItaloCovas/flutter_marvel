@@ -87,23 +87,40 @@ class _ComicsDetailsPageState extends State<ComicsDetailsPage> {
                       backgroundColor.withOpacity(1),
                       backgroundColor.withOpacity(1),
                       backgroundColor.withOpacity(0.4),
-                      backgroundColor.withOpacity(0),
-                      backgroundColor.withOpacity(0),
-                      backgroundColor.withOpacity(0),
+                      backgroundColor.withOpacity(0.3),
+                      backgroundColor.withOpacity(0.2),
+                      backgroundColor.withOpacity(0.1),
                       backgroundColor.withOpacity(0),
                     ])),
               )),
               Positioned(
                   top: 190,
+                  left: 50,
                   child: Hero(
                     tag: widget.heroTag,
                     child: Material(
                       type: MaterialType.transparency,
-                      child: Image.network(
-                        "${comicsStore.comicsModel![index].thumbnail!.path}.${comicsStore.comicsModel![index].thumbnail!.extension}",
-                        width: 170,
-                        height: 180,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          border:
+                              Border.all(width: 2, color: Colors.grey.shade400),
+                        ),
+                        child: Image.network(
+                          "${comicsStore.comicsModel![index].thumbnail!.path}.${comicsStore.comicsModel![index].thumbnail!.extension}",
+                          width: 120,
+                          height: 180,
+                          fit: BoxFit.cover,
+                        ),
                       ),
+                    ),
+                  )),
+              Positioned(
+                  top: 230,
+                  left: 200,
+                  child: Container(
+                    child: Icon(
+                      Icons.star_rounded,
+                      color: starColor,
                     ),
                   ))
             ],

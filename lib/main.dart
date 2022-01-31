@@ -4,6 +4,7 @@ import 'package:flutter_marvel/controller/characters_store.dart';
 import 'package:flutter_marvel/controller/comics_store.dart';
 import 'package:flutter_marvel/controller/series_store.dart';
 import 'package:flutter_marvel/pages/comics_page.dart';
+import 'package:flutter_marvel/pages/comicsdetails_page.dart';
 import 'package:flutter_marvel/pages/loading_page.dart';
 import 'package:get_it/get_it.dart';
 
@@ -27,6 +28,6 @@ class MyApp extends StatelessWidget {
           // is not restarted.
           primarySwatch: Colors.red,
         ),
-        home: const LoadingPage());
+        home: ComicsPage());
   }
 }
