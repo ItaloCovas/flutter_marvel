@@ -134,7 +134,7 @@ class _ComicsDetailsPageState extends State<ComicsDetailsPage> {
                               ),
                             ],
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 25,
                           ),
                           Text(
@@ -142,9 +142,9 @@ class _ComicsDetailsPageState extends State<ComicsDetailsPage> {
                                 comicsStore.comicsModel![index].creators!
                                     .items![0].name
                                     .toString(),
-                            style: TextStyle(color: titleColor),
+                            style: const TextStyle(color: titleColor),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 20,
                           ),
                           Text(
@@ -152,7 +152,7 @@ class _ComicsDetailsPageState extends State<ComicsDetailsPage> {
                                 comicsStore.comicsModel![index].creators!
                                     .items![0].role
                                     .toString(),
-                            style: TextStyle(color: titleColor),
+                            style: const TextStyle(color: titleColor),
                           ),
                           const SizedBox(
                             height: 25,
@@ -192,13 +192,8 @@ class _ComicsDetailsPageState extends State<ComicsDetailsPage> {
                       ),
                       Text(
                           "${comicsStore.comicsModel![index].description != '#N/A' ? comicsStore.comicsModel![index].description : comicsStore.comicsModel![index].textObjects![0].text}",
-<<<<<<< HEAD
-                          style: TextStyle(
-                            color: Colors.grey.shade500,
-=======
                           style: const TextStyle(
                             color: textSecondaryColor,
->>>>>>> 68b34b8b9dc058404aeb7e1ab141d53af8be886d
                             fontSize: 16,
                           )),
                     ],
