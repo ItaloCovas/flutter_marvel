@@ -6,6 +6,7 @@ import 'package:flutter_marvel/controller/series_store.dart';
 import 'package:flutter_marvel/pages/characters_page.dart';
 import 'package:flutter_marvel/pages/comics_page.dart';
 import 'package:flutter_marvel/pages/home_page.dart';
+import 'package:flutter_marvel/pages/seriesdetails_page.dart';
 import 'package:flutter_marvel/themes/theme.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:get_it/get_it.dart';
@@ -198,60 +199,68 @@ class _SeriesPageState extends State<SeriesPage> {
                         gridDelegate:
                             const SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 2,
-                          crossAxisSpacing: 0,
-                          mainAxisSpacing: 7,
-                          childAspectRatio: 0.9,
+                          crossAxisSpacing: 3,
+                          mainAxisSpacing: 8,
+                          childAspectRatio: 0.65,
                         ),
                         itemCount: seriesStore.seriesModel?.length,
                         itemBuilder: (ctx, index) {
                           var series = seriesStore.seriesModel![index];
-                          return GestureDetector(
-                            onTap: () {
-                              print('click');
-                            },
-                            child: Container(
-                                margin:
-                                    const EdgeInsets.only(left: 5, right: 5),
-                                decoration: BoxDecoration(
+                          return Hero(
+                            tag: index,
+                            child: GestureDetector(
+                              onTap: () {
+                                Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (_) => SeriesDetailsPage(
+                                          index: index,
+                                          heroTag: index,
+                                        )));
+                              },
+                              child: Container(
+                                  margin:
+                                      const EdgeInsets.only(left: 5, right: 5),
+                                  decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(10),
-                                    color: Colors.red),
-                                child: Column(
-                                  children: [
-                                    const SizedBox(
-                                      height: 8,
-                                    ),
-                                    Center(
-                                      child: Padding(
-                                        padding: const EdgeInsets.only(left: 5),
-                                        child: Text(
-                                          series.title.toString(),
-                                          style: const TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 12,
-                                              fontFamily: "Marvel",
-                                              letterSpacing: 0.5),
+                                  ),
+                                  child: Column(
+                                    children: [
+                                      const SizedBox(
+                                        height: 8,
+                                      ),
+                                      Center(
+                                        child: Padding(
+                                          padding:
+                                              const EdgeInsets.only(left: 5),
+                                          child: Text(
+                                            series.title.toString(),
+                                            style: const TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 12,
+                                                fontFamily: "Marvel",
+                                                letterSpacing: 0.5),
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                    const SizedBox(
-                                      height: 12,
-                                    ),
-                                    Container(
-                                      decoration: BoxDecoration(
-                                          border: Border.all(
-                                              color: Colors.grey.shade400,
-                                              width: 2),
-                                          borderRadius:
-                                              BorderRadius.circular(3)),
-                                      child: Image.network(
-                                        "${series.thumbnail!.path}.${series.thumbnail!.extension}",
-                                        width: 110,
-                                        height: 160,
-                                        fit: BoxFit.cover,
+                                      const SizedBox(
+                                        height: 12,
                                       ),
-                                    ),
-                                  ],
-                                )),
+                                      Container(
+                                        decoration: BoxDecoration(
+                                            border: Border.all(
+                                                color: Colors.grey.shade400,
+                                                width: 2),
+                                            borderRadius:
+                                                BorderRadius.circular(3)),
+                                        child: Image.network(
+                                          "${series.thumbnail!.path}.${series.thumbnail!.extension}",
+                                          width: 110,
+                                          height: 160,
+                                          fit: BoxFit.cover,
+                                        ),
+                                      ),
+                                    ],
+                                  )),
+                            ),
                           );
                         }),
                   ),
