@@ -67,7 +67,7 @@ class _CharactersPageState extends State<CharactersPage> {
                       fontFamily: 'Marvel',
                       fontWeight: FontWeight.w600,
                       letterSpacing: 3,
-                      fontSize: 40,
+                      fontSize: 36,
                       shadows: [
                         Shadow(
                           blurRadius: 6.0,

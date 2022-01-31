@@ -183,11 +183,11 @@ class _SeriesDetailsPageState extends State<SeriesDetailsPage> {
                       height: 10,
                     ),
                     Text("${seriesStore.seriesModel![index].description}",
-                        style: const TextStyle(
-                          color: textSecondaryColor,
+                        style: TextStyle(
+                          color: Colors.grey.shade400,
                           fontSize: 16,
                         )),
-                    SizedBox(
+                    const SizedBox(
                       height: 25,
                     )
                   ],
