@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_marvel/controller/comics_store.dart';
 import 'package:flutter_marvel/themes/theme.dart';
@@ -32,6 +34,13 @@ class _ComicsDetailsPageState extends State<ComicsDetailsPage> {
 
   @override
   Widget build(BuildContext context) {
+    Random random = Random();
+    int min = 6;
+    int max = 10;
+    double randomNumber = min + ((max - min) * Random().nextDouble());
+    var width = MediaQuery.of(context).size.width;
+    var height = MediaQuery.of(context).size.height;
+
     return Scaffold(
         backgroundColor: backgroundColor,
         appBar: AppBar(
@@ -60,70 +69,124 @@ class _ComicsDetailsPageState extends State<ComicsDetailsPage> {
           ),
         ),
         body: Observer(builder: (_) {
-          return Stack(
-            children: [
-              Image.network(
-                "${comicsStore.comicsModel![index].thumbnail!.path}.${comicsStore.comicsModel![index].thumbnail!.extension}",
-                fit: BoxFit.cover,
-                width: double.infinity,
-              ),
-              Positioned(
-                  child: Container(
-                decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                        begin: Alignment.bottomCenter,
-                        end: Alignment.topCenter,
-                        colors: [
-                      backgroundColor.withOpacity(1),
-                      backgroundColor.withOpacity(1),
-                      backgroundColor.withOpacity(1),
-                      backgroundColor.withOpacity(1),
-                      backgroundColor.withOpacity(1),
-                      backgroundColor.withOpacity(1),
-                      backgroundColor.withOpacity(1),
-                      backgroundColor.withOpacity(1),
-                      backgroundColor.withOpacity(1),
-                      backgroundColor.withOpacity(1),
-                      backgroundColor.withOpacity(1),
-                      backgroundColor.withOpacity(1),
-                      backgroundColor.withOpacity(0.4),
-                      backgroundColor.withOpacity(0.3),
-                      backgroundColor.withOpacity(0.2),
-                      backgroundColor.withOpacity(0.1),
-                      backgroundColor.withOpacity(0),
-                    ])),
-              )),
-              Positioned(
-                  top: 190,
-                  left: 50,
-                  child: Hero(
-                    tag: widget.heroTag,
-                    child: Material(
-                      type: MaterialType.transparency,
-                      child: Container(
-                        decoration: BoxDecoration(
-                          border:
-                              Border.all(width: 2, color: Colors.grey.shade400),
-                        ),
-                        child: Image.network(
-                          "${comicsStore.comicsModel![index].thumbnail!.path}.${comicsStore.comicsModel![index].thumbnail!.extension}",
-                          width: 120,
-                          height: 180,
-                          fit: BoxFit.cover,
+          return SingleChildScrollView(
+            child: Column(
+              children: [
+                ShaderMask(
+                  shaderCallback: (rect) {
+                    return const LinearGradient(
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      colors: [
+                        Colors.black,
+                        Colors.transparent,
+                      ],
+                    ).createShader(
+                        Rect.fromLTRB(0, 0, rect.width, rect.height - 50));
+                  },
+                  blendMode: BlendMode.dstIn,
+                  child: Image.network(
+                    "${comicsStore.comicsModel![index].thumbnail!.path}.${comicsStore.comicsModel![index].thumbnail!.extension}",
+                    fit: BoxFit.fitWidth,
+                    width: double.infinity,
+                    height: 300,
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 40),
+                  child: Row(
+                    children: [
+                      Hero(
+                        tag: widget.heroTag,
+                        child: Material(
+                          type: MaterialType.transparency,
+                          child: Container(
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                  width: 2, color: Colors.grey.shade400),
+                            ),
+                            child: Image.network(
+                              "${comicsStore.comicsModel![index].thumbnail!.path}.${comicsStore.comicsModel![index].thumbnail!.extension}",
+                              width: 120,
+                              height: 180,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
                         ),
                       ),
-                    ),
-                  )),
-              Positioned(
-                  top: 230,
-                  left: 200,
-                  child: Container(
-                    child: Icon(
-                      Icons.star_rounded,
-                      color: starColor,
-                    ),
-                  ))
-            ],
+                      const SizedBox(width: 40),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            children: [
+                              const Icon(
+                                Icons.star_rounded,
+                                color: starColor,
+                              ),
+                              Text(" " + randomNumber.toStringAsFixed(2),
+                                  style: const TextStyle(
+                                    color: Colors.white,
+                                  )),
+                            ],
+                          ),
+                          const SizedBox(
+                            height: 25,
+                          ),
+                          const Text("Available in: ",
+                              textAlign: TextAlign.left,
+                              style: TextStyle(
+                                color: titleColor,
+                              )),
+                          const SizedBox(height: 15),
+                          Row(
+                            children: [
+                              Container(
+                                width: 50,
+                                height: 30,
+                                decoration: BoxDecoration(
+                                  color: Colors.grey.shade700,
+                                  border:
+                                      Border.all(color: Colors.white, width: 1),
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                child: const Center(
+                                  child: Text("720p",
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 12,
+                                      )),
+                                ),
+                              ),
+                              const SizedBox(
+                                width: 20,
+                              ),
+                              Container(
+                                width: 50,
+                                height: 30,
+                                decoration: BoxDecoration(
+                                  color: Colors.grey.shade700,
+                                  border:
+                                      Border.all(color: Colors.white, width: 1),
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                child: const Center(
+                                  child: Text("1080p",
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 12,
+                                      )),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
+                ),
+              ],
+            ),
           );
         }));
   }
