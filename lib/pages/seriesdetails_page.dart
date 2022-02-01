@@ -132,6 +132,23 @@ class _SeriesDetailsPageState extends State<SeriesDetailsPage> {
                         const SizedBox(
                           height: 25,
                         ),
+                        Text(
+                          "Creator: " +
+                              (series.creators!.items!.isNotEmpty
+                                  ? series.creators!.items![0].name!
+                                  : "Name is not defined"),
+                          style: const TextStyle(color: titleColor),
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        Text(
+                          "Role: " +
+                              (series.creators!.items!.isNotEmpty
+                                  ? series.creators!.items![0].role!
+                                  : "Role is not defined"),
+                          style: const TextStyle(color: titleColor),
+                        ),
                         const SizedBox(
                           height: 25,
                         ),
