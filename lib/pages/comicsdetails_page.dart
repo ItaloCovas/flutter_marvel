@@ -138,6 +138,23 @@ class _ComicsDetailsPageState extends State<ComicsDetailsPage> {
                           const SizedBox(
                             height: 25,
                           ),
+                          Text(
+                            "Creator: " +
+                                (comics.creators!.items!.isNotEmpty
+                                    ? comics.creators!.items![0].name!
+                                    : "Name is not defined"),
+                            style: const TextStyle(color: titleColor),
+                          ),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          Text(
+                            "Role: " +
+                                (comics.creators!.items!.isNotEmpty
+                                    ? comics.creators!.items![0].role!
+                                    : "Role is not defined"),
+                            style: const TextStyle(color: titleColor),
+                          ),
                           const SizedBox(
                             height: 25,
                           ),
