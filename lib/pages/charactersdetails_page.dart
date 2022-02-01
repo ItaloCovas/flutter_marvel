@@ -141,6 +141,16 @@ class _CharacterDetailsPage extends State<CharacterDetailsPage> {
                             const SizedBox(
                               height: 25,
                             ),
+                            Text(
+                              "Series: " +
+                                  (characters.series!.items!.isNotEmpty
+                                      ? characters.series!.items![0].name!
+                                      : "Series is not defined"),
+                              style: const TextStyle(color: titleColor),
+                            ),
+                            const SizedBox(
+                              height: 20,
+                            ),
                             const SizedBox(
                               height: 25,
                             ),

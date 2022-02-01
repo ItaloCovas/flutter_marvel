@@ -107,10 +107,11 @@ class Comics {
     available = json['available'];
     collectionURI = json['collectionURI'];
     if (json['items'] != null) {
-      items = <Items>[];
+      List<Items> itemsAux = [];
       json['items'].forEach((v) {
-        items!.add(Items.fromJson(v));
+        itemsAux.add(Items.fromJson(v));
       });
+      items = itemsAux;
     }
     returned = json['returned'];
   }
