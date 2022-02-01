@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_marvel/api/comics_api.dart';
 import 'package:flutter_marvel/controller/characters_store.dart';
 import 'package:flutter_marvel/controller/comics_store.dart';
+import 'package:flutter_marvel/controller/events_store.dart';
 import 'package:flutter_marvel/controller/series_store.dart';
 import 'package:flutter_marvel/pages/comics_page.dart';
-import 'package:flutter_marvel/pages/comicsdetails_page.dart';
 import 'package:flutter_marvel/pages/loading_page.dart';
 import 'package:get_it/get_it.dart';
 
@@ -14,6 +14,7 @@ void main() {
   getIt.registerSingleton<SeriesStore>(SeriesStore());
   getIt.registerSingleton<CharactersStore>(CharactersStore());
   getIt.registerSingleton<ComicsApi>(ComicsApi());
+  getIt.registerSingleton<EventsStore>(EventsStore());
   runApp(const MyApp());
 }
 
@@ -28,6 +29,6 @@ class MyApp extends StatelessWidget {
           // is not restarted.
           primarySwatch: Colors.red,
         ),
-        home: ComicsPage());
+        home: LoadingPage());
   }
 }

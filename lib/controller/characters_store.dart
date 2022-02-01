@@ -1,7 +1,7 @@
 import 'package:flutter_marvel/api/characters_api.dart';
-import 'package:flutter_marvel/api/series_api.dart';
+
 import 'package:flutter_marvel/models/characters_model.dart';
-import 'package:flutter_marvel/models/series_model.dart';
+
 import 'package:mobx/mobx.dart';
 part 'characters_store.g.dart';
 

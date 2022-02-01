@@ -1,37 +1,31 @@
 import 'package:carousel_slider/carousel_slider.dart';
-
 import 'package:flutter/material.dart';
-
-import 'package:flutter_marvel/controller/comics_store.dart';
+import 'package:flutter_marvel/controller/events_store.dart';
 import 'package:flutter_marvel/pages/characters_page.dart';
-import 'package:flutter_marvel/pages/comicsdetails_page.dart';
-import 'package:flutter_marvel/pages/events_page.dart';
+import 'package:flutter_marvel/pages/comics_page.dart';
+import 'package:flutter_marvel/pages/eventsdetails_page.dart';
 import 'package:flutter_marvel/pages/home_page.dart';
-
 import 'package:flutter_marvel/themes/theme.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:get_it/get_it.dart';
 
-class ComicsPage extends StatefulWidget {
-  const ComicsPage({Key? key}) : super(key: key);
+class EventsPage extends StatefulWidget {
+  const EventsPage({Key? key}) : super(key: key);
   @override
-  State<ComicsPage> createState() => _ComicsPageState();
+  State<EventsPage> createState() => _EventsPageState();
 }
 
-class _ComicsPageState extends State<ComicsPage> {
-  final comicsStore = GetIt.I.get<ComicsStore>();
-  final pages = [ComicsPage(), CharactersPage(), EventsPage()];
+class _EventsPageState extends State<EventsPage> {
+  final eventsStore = GetIt.I.get<EventsStore>();
+
   @override
   void initState() {
     super.initState();
-    comicsStore.getComicsList();
+    eventsStore.getEventsList();
   }
 
   @override
   Widget build(BuildContext context) {
-    var width = MediaQuery.of(context).size.width;
-
-    var height = MediaQuery.of(context).size.height;
     return Scaffold(
       resizeToAvoidBottomInset: true,
       backgroundColor: backgroundColor,
@@ -45,35 +39,39 @@ class _ComicsPageState extends State<ComicsPage> {
               const IconThemeData(color: primaryButton, size: 30),
           selectedItemColor: primaryButton,
           unselectedItemColor: titleColor,
-          currentIndex: comicsStore.selectedIndex,
-          onTap: (index) => comicsStore.selectedIndex = index,
+          currentIndex: eventsStore.selectedIndex,
+          onTap: (index) => eventsStore.selectedIndex = index,
           items: [
             BottomNavigationBarItem(
-              icon: GestureDetector(
-                  onTap: () {
-                    print("comics");
-                  },
-                  child: Icon(Icons.menu_book)),
+              icon: IconButton(
+                onPressed: () {
+                  Navigator.of(context).push(
+                      MaterialPageRoute(builder: (_) => const ComicsPage()));
+                },
+                icon: const Icon(Icons.menu_book),
+              ),
               label: "Comics",
             ),
             BottomNavigationBarItem(
-              icon: GestureDetector(
-                  onTap: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (_) => const CharactersPage()));
-                  },
-                  child: Icon(Icons.face)),
+              icon: IconButton(
+                onPressed: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (_) => const CharactersPage()));
+                },
+                icon: const Icon(Icons.face),
+              ),
               label: "Characters",
             ),
             BottomNavigationBarItem(
-              icon: GestureDetector(
-                  onTap: () {
-                    Navigator.of(context).push(
-                        MaterialPageRoute(builder: (_) => const EventsPage()));
-                  },
-                  child: Icon(Icons.schedule)),
+              icon: IconButton(
+                onPressed: () {
+                  onPressed:
+                  () {};
+                },
+                icon: const Icon(Icons.schedule),
+              ),
               label: "Events",
-            ),
+            )
           ],
         );
       }),
@@ -84,7 +82,7 @@ class _ComicsPageState extends State<ComicsPage> {
         title: Observer(builder: (_) {
           return Padding(
             padding: const EdgeInsets.only(top: 0),
-            child: comicsStore.isSearching
+            child: eventsStore.isSearching
                 ? Container(
                     height: 30,
                     decoration: BoxDecoration(
@@ -93,9 +91,8 @@ class _ComicsPageState extends State<ComicsPage> {
                     ),
                     child: TextField(
                       onSubmitted: (text) {
-                        comicsStore.setSearchText(text);
-                        comicsStore.getComicsList();
-                        comicsStore.toggleIsSearching();
+                        eventsStore.setSearchText(text);
+                        eventsStore.getEventsList();
                       },
                       style: const TextStyle(
                         color: Colors.black,
@@ -111,7 +108,7 @@ class _ComicsPageState extends State<ComicsPage> {
                     ),
                   )
                 : Text(
-                    "Marvel Comics".toUpperCase(),
+                    "Marvel Events".toUpperCase(),
                     style: const TextStyle(
                       color: primaryButton,
                       fontFamily: 'Marvel',
@@ -134,17 +131,11 @@ class _ComicsPageState extends State<ComicsPage> {
             padding: const EdgeInsets.only(right: 7),
             child: IconButton(
                 onPressed: () {
-                  comicsStore.toggleIsSearching();
+                  eventsStore.toggleIsSearching();
                 },
                 icon: const Icon(Icons.search)),
           )
         ],
-        leading: GestureDetector(
-            onTap: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => const HomePage()));
-            },
-            child: const Icon(Icons.arrow_back_ios_new)),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -152,7 +143,7 @@ class _ComicsPageState extends State<ComicsPage> {
           children: [
             Container(
               child: Observer(builder: (_) {
-                if (comicsStore.comicsModel != null) {
+                if (eventsStore.eventsModel != null) {
                   return Padding(
                     padding: const EdgeInsets.only(top: 20, bottom: 20),
                     child: CarouselSlider.builder(
@@ -171,13 +162,13 @@ class _ComicsPageState extends State<ComicsPage> {
                         enlargeCenterPage: true,
                         scrollDirection: Axis.horizontal,
                       ),
-                      itemCount: comicsStore.comicsModel?.length,
+                      itemCount: eventsStore.eventsModel?.length,
                       itemBuilder:
                           (BuildContext context, int index, int pageViewIndex) {
-                        var comics = comicsStore.comicsModel![index];
+                        var events = eventsStore.eventsModel![index];
                         return Container(
                           child: Image.network(
-                              "${comics.thumbnail!.path}.${comics.thumbnail!.extension}"),
+                              "${events.thumbnail!.path}.${events.thumbnail!.extension}"),
                         );
                       },
                     ),
@@ -196,7 +187,7 @@ class _ComicsPageState extends State<ComicsPage> {
               height: 20,
             ),
             Observer(builder: (_) {
-              if (comicsStore.comicsModel != null) {
+              if (eventsStore.eventsModel != null) {
                 return Flexible(
                   fit: FlexFit.loose,
                   child: Padding(
@@ -211,15 +202,15 @@ class _ComicsPageState extends State<ComicsPage> {
                           mainAxisSpacing: 8,
                           childAspectRatio: 0.65,
                         ),
-                        itemCount: comicsStore.comicsModel?.length,
+                        itemCount: eventsStore.eventsModel?.length,
                         itemBuilder: (ctx, index) {
-                          var comics = comicsStore.comicsModel![index];
+                          var events = eventsStore.eventsModel![index];
                           return Hero(
                             tag: index,
                             child: GestureDetector(
                               onTap: () {
                                 Navigator.of(context).push(MaterialPageRoute(
-                                    builder: (_) => ComicsDetailsPage(
+                                    builder: (_) => EventsDetailsPage(
                                           index: index,
                                           heroTag: index,
                                         )));
@@ -240,7 +231,7 @@ class _ComicsPageState extends State<ComicsPage> {
                                           padding:
                                               const EdgeInsets.only(left: 5),
                                           child: Text(
-                                            comics.title.toString(),
+                                            events.title.toString(),
                                             style: const TextStyle(
                                                 color: Colors.white,
                                                 fontSize: 12,
@@ -260,7 +251,7 @@ class _ComicsPageState extends State<ComicsPage> {
                                             borderRadius:
                                                 BorderRadius.circular(5)),
                                         child: Image.network(
-                                          "${comics.thumbnail!.path}.${comics.thumbnail!.extension}",
+                                          "${events.thumbnail!.path}.${events.thumbnail!.extension}",
                                           width: 110,
                                           height: 160,
                                           fit: BoxFit.cover,

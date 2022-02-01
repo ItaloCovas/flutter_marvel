@@ -39,8 +39,7 @@ class _CharacterDetailsPage extends State<CharacterDetailsPage> {
     int min = 6;
     int max = 10;
     double randomNumber = min + ((max - min) * Random().nextDouble());
-    var width = MediaQuery.of(context).size.width;
-    var height = MediaQuery.of(context).size.height;
+
     var characters = charactersStore.charactersModel![index];
 
     return Scaffold(
@@ -72,7 +71,9 @@ class _CharacterDetailsPage extends State<CharacterDetailsPage> {
         ),
         body: Observer(builder: (_) {
           return SingleChildScrollView(
+            physics: AlwaysScrollableScrollPhysics(),
             child: Column(
+              mainAxisSize: MainAxisSize.min,
               children: [
                 ShaderMask(
                   shaderCallback: (rect) {
@@ -95,7 +96,7 @@ class _CharacterDetailsPage extends State<CharacterDetailsPage> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(left: 20),
+                  padding: const EdgeInsets.only(left: 170),
                   child: Row(
                     children: [
                       Hero(
@@ -117,42 +118,8 @@ class _CharacterDetailsPage extends State<CharacterDetailsPage> {
                         ),
                       ),
                       const SizedBox(width: 10),
-                      Padding(
-                        padding: const EdgeInsets.only(right: 40, left: 20),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              children: [
-                                const Icon(
-                                  Icons.star_rounded,
-                                  color: starColor,
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(right: 20),
-                                  child: Text(
-                                      "  " + randomNumber.toStringAsFixed(2),
-                                      style: const TextStyle(
-                                        color: titleColor,
-                                      )),
-                                ),
-                              ],
-                            ),
-                            const SizedBox(
-                              height: 25,
-                            ),
-                            Text(
-                              "Comics: " +
-                                  (characters.comics!.items!.isNotEmpty
-                                      ? characters.comics!.items![0].name!
-                                      : "Comics is not defined"),
-                              style: const TextStyle(color: titleColor),
-                            ),
-                            const SizedBox(
-                              height: 25,
-                            ),
-                          ],
-                        ),
+                      const Padding(
+                        padding: EdgeInsets.only(right: 40, left: 20),
                       ),
                     ],
                   ),
@@ -160,76 +127,155 @@ class _CharacterDetailsPage extends State<CharacterDetailsPage> {
                 const SizedBox(
                   height: 30,
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(right: 60, left: 20),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Text(
-                        "Action / Adventure / Fantasy / Sci-Fi",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      const Text("Synopsis",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 15,
-                            fontWeight: FontWeight.bold,
-                          )),
-                      const SizedBox(
-                        height: 15,
-                      ),
-                      Text("${characters.description}",
-                          style: TextStyle(
-                            color: Colors.grey.shade400,
-                            fontSize: 16,
-                          )),
-                      const SizedBox(
-                        height: 15,
-                      ),
-                      const Text("Series",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 15,
-                            fontWeight: FontWeight.bold,
-                          )),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      Text("${characters.series!.items![0].name}",
-                          style: TextStyle(
-                            color: Colors.grey.shade400,
-                            fontSize: 16,
-                          )),
-                      const SizedBox(
-                        height: 15,
-                      ),
-                      const Text("Comics",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 15,
-                            fontWeight: FontWeight.bold,
-                          )),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      Text("${characters.comics!.items![0].name}",
-                          style: TextStyle(
-                            color: Colors.grey.shade400,
-                            fontSize: 16,
-                          )),
-                      const SizedBox(
-                        height: 25,
-                      )
-                    ],
+                const Text(
+                  "Action / Adventure / Fantasy / Sci-Fi",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
+                const SizedBox(
+                  height: 10,
+                ),
+                const Text("Synopsis",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold,
+                    )),
+                const SizedBox(
+                  height: 15,
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 60, right: 60),
+                  child: Text("${characters.description}",
+                      style: TextStyle(
+                        color: Colors.grey.shade400,
+                        fontSize: 16,
+                      )),
+                ),
+                const SizedBox(
+                  height: 15,
+                ),
+                const Text("Series",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    )),
+                Flexible(
+                  fit: FlexFit.loose,
+                  child: ListView.builder(
+                      shrinkWrap: true,
+                      physics: NeverScrollableScrollPhysics(),
+                      itemCount: charactersStore
+                          .charactersModel![index].series!.items?.length,
+                      itemBuilder: (ctx, index) {
+                        return ListTile(
+                            title: Text(characters.series!.items![index].name!,
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    color: Colors.grey.shade400,
+                                    fontSize: 15)));
+                      }),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                const Text("Comics",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    )),
+                const SizedBox(
+                  height: 10,
+                ),
+                Flexible(
+                  fit: FlexFit.loose,
+                  child: ListView.builder(
+                      shrinkWrap: true,
+                      physics: NeverScrollableScrollPhysics(),
+                      itemCount: charactersStore
+                          .charactersModel![index].comics!.items?.length,
+                      itemBuilder: (ctx, index) {
+                        return ListTile(
+                            title: Text(
+                                characters.comics!.items!.isNotEmpty
+                                    ? characters.comics!.items![index].name!
+                                    : "No comics",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    color: Colors.grey.shade400,
+                                    fontSize: 15)));
+                      }),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                const Text("Stories",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    )),
+                const SizedBox(
+                  height: 10,
+                ),
+                Flexible(
+                  fit: FlexFit.loose,
+                  child: ListView.builder(
+                      shrinkWrap: true,
+                      physics: NeverScrollableScrollPhysics(),
+                      itemCount: charactersStore
+                          .charactersModel![index].stories!.items?.length,
+                      itemBuilder: (ctx, index) {
+                        return ListTile(
+                            title: Text(
+                                characters.comics!.items!.isNotEmpty
+                                    ? characters.stories!.items![index].name!
+                                    : "No stories",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    color: Colors.grey.shade400,
+                                    fontSize: 15)));
+                      }),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                const Text("Events",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    )),
+                const SizedBox(
+                  height: 10,
+                ),
+                Flexible(
+                  fit: FlexFit.loose,
+                  child: ListView.builder(
+                      shrinkWrap: true,
+                      physics: NeverScrollableScrollPhysics(),
+                      itemCount: charactersStore
+                          .charactersModel![index].events!.items?.length,
+                      itemBuilder: (ctx, index) {
+                        return ListTile(
+                            title: Text(
+                                characters.comics!.items!.isNotEmpty
+                                    ? characters.events!.items![index].name!
+                                    : "No events",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    color: Colors.grey.shade400,
+                                    fontSize: 15)));
+                      }),
+                ),
+                const SizedBox(
+                  height: 25,
+                )
               ],
             ),
           );
