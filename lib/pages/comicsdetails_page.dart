@@ -40,6 +40,7 @@ class _ComicsDetailsPageState extends State<ComicsDetailsPage> {
     double randomNumber = min + ((max - min) * Random().nextDouble());
     var width = MediaQuery.of(context).size.width;
     var height = MediaQuery.of(context).size.height;
+    var comics = comicsStore.comicsModel![index];
 
     return Scaffold(
         backgroundColor: backgroundColor,
@@ -50,7 +51,7 @@ class _ComicsDetailsPageState extends State<ComicsDetailsPage> {
           title: Padding(
             padding: const EdgeInsets.only(left: 7),
             child: Text(
-              comicsStore.comicsModel![index].title.toString().toUpperCase(),
+              comics.title.toString().toUpperCase(),
               style: const TextStyle(
                 color: primaryButton,
                 fontFamily: 'Marvel',
@@ -86,7 +87,7 @@ class _ComicsDetailsPageState extends State<ComicsDetailsPage> {
                   },
                   blendMode: BlendMode.dstIn,
                   child: Image.network(
-                    "${comicsStore.comicsModel![index].thumbnail!.path}.${comicsStore.comicsModel![index].thumbnail!.extension}",
+                    "${comics.thumbnail!.path}.${comics.thumbnail!.extension}",
                     fit: BoxFit.fitWidth,
                     width: double.infinity,
                     height: 300,
@@ -106,7 +107,7 @@ class _ComicsDetailsPageState extends State<ComicsDetailsPage> {
                                   width: 2, color: Colors.grey.shade400),
                             ),
                             child: Image.network(
-                              "${comicsStore.comicsModel![index].thumbnail!.path}.${comicsStore.comicsModel![index].thumbnail!.extension}",
+                              "${comics.thumbnail!.path}.${comics.thumbnail!.extension}",
                               width: 120,
                               height: 180,
                               fit: BoxFit.cover,
@@ -139,19 +140,15 @@ class _ComicsDetailsPageState extends State<ComicsDetailsPage> {
                           ),
                           Text(
                             "Creator: " +
-                                comicsStore.comicsModel![index].creators!
-                                    .items![0].name
-                                    .toString(),
-                            style: TextStyle(color: titleColor),
+                                comics.creators!.items![0].name.toString(),
+                            style: const TextStyle(color: titleColor),
                           ),
                           const SizedBox(
                             height: 20,
                           ),
                           Text(
                             "Role: " +
-                                comicsStore.comicsModel![index].creators!
-                                    .items![0].role
-                                    .toString(),
+                                comics.creators!.items![0].role.toString(),
                             style: const TextStyle(color: titleColor),
                           ),
                           const SizedBox(
@@ -191,7 +188,7 @@ class _ComicsDetailsPageState extends State<ComicsDetailsPage> {
                         height: 10,
                       ),
                       Text(
-                          "${comicsStore.comicsModel![index].description != '#N/A' ? comicsStore.comicsModel![index].description : comicsStore.comicsModel![index].textObjects![0].text}",
+                          "${comics.description != '#N/A' ? comics.description : comics.textObjects![0].text}",
                           style: TextStyle(
                             color: Colors.grey.shade400,
                             fontSize: 16,

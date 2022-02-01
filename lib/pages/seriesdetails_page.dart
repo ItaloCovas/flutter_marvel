@@ -35,6 +35,7 @@ class _SeriesDetailsPageState extends State<SeriesDetailsPage> {
     int min = 6;
     int max = 10;
     double randomNumber = min + ((max - min) * Random().nextDouble());
+    var series = seriesStore.seriesModel![index];
     return Scaffold(
       backgroundColor: backgroundColor,
       appBar: AppBar(
@@ -44,7 +45,7 @@ class _SeriesDetailsPageState extends State<SeriesDetailsPage> {
         title: Padding(
           padding: const EdgeInsets.only(left: 7),
           child: Text(
-            seriesStore.seriesModel![index].title.toString().toUpperCase(),
+            series.title.toString().toUpperCase(),
             style: const TextStyle(
               color: primaryButton,
               fontFamily: 'Marvel',
@@ -80,7 +81,7 @@ class _SeriesDetailsPageState extends State<SeriesDetailsPage> {
                 },
                 blendMode: BlendMode.dstIn,
                 child: Image.network(
-                  "${seriesStore.seriesModel![index].thumbnail!.path}.${seriesStore.seriesModel![index].thumbnail!.extension}",
+                  "${series.thumbnail!.path}.${series.thumbnail!.extension}",
                   fit: BoxFit.fitWidth,
                   width: double.infinity,
                   height: 300,
@@ -100,7 +101,7 @@ class _SeriesDetailsPageState extends State<SeriesDetailsPage> {
                                 width: 2, color: Colors.grey.shade400),
                           ),
                           child: Image.network(
-                            "${seriesStore.seriesModel![index].thumbnail!.path}.${seriesStore.seriesModel![index].thumbnail!.extension}",
+                            "${series.thumbnail!.path}.${series.thumbnail!.extension}",
                             width: 120,
                             height: 180,
                             fit: BoxFit.cover,
@@ -133,19 +134,14 @@ class _SeriesDetailsPageState extends State<SeriesDetailsPage> {
                         ),
                         Text(
                           "Creator: " +
-                              seriesStore
-                                  .seriesModel![index].creators!.items![0].name
-                                  .toString(),
+                              series.creators!.items![0].name.toString(),
                           style: const TextStyle(color: titleColor),
                         ),
                         const SizedBox(
                           height: 20,
                         ),
                         Text(
-                          "Role: " +
-                              seriesStore
-                                  .seriesModel![index].creators!.items![0].role
-                                  .toString(),
+                          "Role: " + series.creators!.items![0].role.toString(),
                           style: const TextStyle(color: titleColor),
                         ),
                         const SizedBox(
@@ -182,7 +178,7 @@ class _SeriesDetailsPageState extends State<SeriesDetailsPage> {
                     const SizedBox(
                       height: 10,
                     ),
-                    Text("${seriesStore.seriesModel![index].description}",
+                    Text("${series.description}",
                         style: TextStyle(
                           color: Colors.grey.shade400,
                           fontSize: 16,

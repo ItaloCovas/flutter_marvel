@@ -41,6 +41,7 @@ class _CharacterDetailsPage extends State<CharacterDetailsPage> {
     double randomNumber = min + ((max - min) * Random().nextDouble());
     var width = MediaQuery.of(context).size.width;
     var height = MediaQuery.of(context).size.height;
+    var characters = charactersStore.charactersModel![index];
 
     return Scaffold(
         backgroundColor: backgroundColor,
@@ -51,9 +52,7 @@ class _CharacterDetailsPage extends State<CharacterDetailsPage> {
           title: Padding(
             padding: const EdgeInsets.only(left: 7),
             child: Text(
-              charactersStore.charactersModel![index].name
-                  .toString()
-                  .toUpperCase(),
+              characters.name.toString().toUpperCase(),
               style: const TextStyle(
                 color: primaryButton,
                 fontFamily: 'Marvel',
@@ -89,7 +88,7 @@ class _CharacterDetailsPage extends State<CharacterDetailsPage> {
                   },
                   blendMode: BlendMode.dstIn,
                   child: Image.network(
-                    "${charactersStore.charactersModel![index].thumbnail!.path}.${charactersStore.charactersModel![index].thumbnail!.extension}",
+                    "${characters.thumbnail!.path}.${characters.thumbnail!.extension}",
                     fit: BoxFit.fitWidth,
                     width: double.infinity,
                     height: 300,
@@ -109,7 +108,7 @@ class _CharacterDetailsPage extends State<CharacterDetailsPage> {
                                   width: 2, color: Colors.grey.shade400),
                             ),
                             child: Image.network(
-                              "${charactersStore.charactersModel![index].thumbnail!.path}.${charactersStore.charactersModel![index].thumbnail!.extension}",
+                              "${characters.thumbnail!.path}.${characters.thumbnail!.extension}",
                               width: 120,
                               height: 180,
                               fit: BoxFit.cover,
@@ -146,10 +145,9 @@ class _CharacterDetailsPage extends State<CharacterDetailsPage> {
                               padding: const EdgeInsets.only(right: 8),
                               child: Text(
                                 "Stories: " +
-                                    charactersStore.charactersModel![index]
-                                        .stories!.items![0].name
+                                    characters.stories!.items![0].name
                                         .toString(),
-                                style: TextStyle(
+                                style: const TextStyle(
                                   color: titleColor,
                                 ),
                               ),
@@ -159,9 +157,7 @@ class _CharacterDetailsPage extends State<CharacterDetailsPage> {
                             ),
                             Text(
                               "Events: " +
-                                  charactersStore.charactersModel![index]
-                                      .events!.items![0].name
-                                      .toString(),
+                                  characters.events!.items![0].name.toString(),
                               style: const TextStyle(
                                 color: titleColor,
                               ),
@@ -203,13 +199,12 @@ class _CharacterDetailsPage extends State<CharacterDetailsPage> {
                       const SizedBox(
                         height: 15,
                       ),
-                      Text(
-                          "${charactersStore.charactersModel![index].description}",
+                      Text("${characters.description}",
                           style: TextStyle(
                             color: Colors.grey.shade400,
                             fontSize: 16,
                           )),
-                      SizedBox(
+                      const SizedBox(
                         height: 15,
                       ),
                       const Text("Series",
@@ -221,13 +216,12 @@ class _CharacterDetailsPage extends State<CharacterDetailsPage> {
                       const SizedBox(
                         height: 10,
                       ),
-                      Text(
-                          "${charactersStore.charactersModel![index].series!.items![0].name}",
+                      Text("${characters.series!.items![0].name}",
                           style: TextStyle(
                             color: Colors.grey.shade400,
                             fontSize: 16,
                           )),
-                      SizedBox(
+                      const SizedBox(
                         height: 15,
                       ),
                       const Text("Comics",
@@ -239,13 +233,12 @@ class _CharacterDetailsPage extends State<CharacterDetailsPage> {
                       const SizedBox(
                         height: 10,
                       ),
-                      Text(
-                          "${charactersStore.charactersModel![index].comics!.items![0].name}",
+                      Text("${characters.comics!.items![0].name}",
                           style: TextStyle(
                             color: Colors.grey.shade400,
                             fontSize: 16,
                           )),
-                      SizedBox(
+                      const SizedBox(
                         height: 25,
                       )
                     ],
