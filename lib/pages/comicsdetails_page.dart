@@ -51,7 +51,7 @@ class _ComicsDetailsPageState extends State<ComicsDetailsPage> {
           title: Padding(
             padding: const EdgeInsets.only(left: 7),
             child: Text(
-              comics.title.toString().toUpperCase(),
+              comics.title!.toUpperCase(),
               style: const TextStyle(
                 color: primaryButton,
                 fontFamily: 'Marvel',
@@ -137,19 +137,6 @@ class _ComicsDetailsPageState extends State<ComicsDetailsPage> {
                           ),
                           const SizedBox(
                             height: 25,
-                          ),
-                          Text(
-                            "Creator: " +
-                                comics.creators!.items![0].name.toString(),
-                            style: const TextStyle(color: titleColor),
-                          ),
-                          const SizedBox(
-                            height: 20,
-                          ),
-                          Text(
-                            "Role: " +
-                                comics.creators!.items![0].role.toString(),
-                            style: const TextStyle(color: titleColor),
                           ),
                           const SizedBox(
                             height: 25,

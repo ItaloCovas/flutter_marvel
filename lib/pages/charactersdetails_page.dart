@@ -141,27 +141,6 @@ class _CharacterDetailsPage extends State<CharacterDetailsPage> {
                             const SizedBox(
                               height: 25,
                             ),
-                            Padding(
-                              padding: const EdgeInsets.only(right: 8),
-                              child: Text(
-                                "Stories: " +
-                                    characters.stories!.items![0].name
-                                        .toString(),
-                                style: const TextStyle(
-                                  color: titleColor,
-                                ),
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 20,
-                            ),
-                            Text(
-                              "Events: " +
-                                  characters.events!.items![0].name.toString(),
-                              style: const TextStyle(
-                                color: titleColor,
-                              ),
-                            ),
                             const SizedBox(
                               height: 25,
                             ),

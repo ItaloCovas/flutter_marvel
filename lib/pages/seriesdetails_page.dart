@@ -132,18 +132,6 @@ class _SeriesDetailsPageState extends State<SeriesDetailsPage> {
                         const SizedBox(
                           height: 25,
                         ),
-                        Text(
-                          "Creator: " +
-                              series.creators!.items![0].name.toString(),
-                          style: const TextStyle(color: titleColor),
-                        ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        Text(
-                          "Role: " + series.creators!.items![0].role.toString(),
-                          style: const TextStyle(color: titleColor),
-                        ),
                         const SizedBox(
                           height: 25,
                         ),

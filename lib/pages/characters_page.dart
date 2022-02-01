@@ -66,8 +66,8 @@ class _CharactersPageState extends State<CharactersPage> {
                       color: primaryButton,
                       fontFamily: 'Marvel',
                       fontWeight: FontWeight.w600,
-                      letterSpacing: 3,
-                      fontSize: 36,
+                      letterSpacing: 2,
+                      fontSize: 30,
                       shadows: [
                         Shadow(
                           blurRadius: 6.0,
@@ -156,8 +156,8 @@ class _CharactersPageState extends State<CharactersPage> {
                             const SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 2,
                           crossAxisSpacing: 3,
-                          mainAxisSpacing: 12,
-                          childAspectRatio: 0.9,
+                          mainAxisSpacing: 8,
+                          childAspectRatio: 0.8,
                         ),
                         itemCount: charactersStore.charactersModel?.length,
                         itemBuilder: (ctx, index) {
