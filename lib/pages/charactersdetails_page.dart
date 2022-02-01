@@ -142,14 +142,11 @@ class _CharacterDetailsPage extends State<CharacterDetailsPage> {
                               height: 25,
                             ),
                             Text(
-                              "Series: " +
-                                  (characters.series!.items!.isNotEmpty
-                                      ? characters.series!.items![0].name!
-                                      : "Series is not defined"),
+                              "Comics: " +
+                                  (characters.comics!.items!.isNotEmpty
+                                      ? characters.comics!.items![0].name!
+                                      : "Comics is not defined"),
                               style: const TextStyle(color: titleColor),
-                            ),
-                            const SizedBox(
-                              height: 20,
                             ),
                             const SizedBox(
                               height: 25,
