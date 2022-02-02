@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_marvel/pages/home_page.dart';
+import 'package:flutter_marvel/pages/comics_page.dart';
+
 import 'package:flutter_marvel/themes/theme.dart';
 import 'package:lottie/lottie.dart';
 
@@ -16,7 +17,7 @@ class _LoadingPageState extends State<LoadingPage> {
   void initState() {
     Future.delayed(Duration(seconds: splashScreenTime), () async {
       Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
-        return const HomePage();
+        return const ComicsPage();
       }));
     });
     super.initState();

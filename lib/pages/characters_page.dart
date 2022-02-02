@@ -1,9 +1,10 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_marvel/controller/characters_store.dart';
+import 'package:flutter_marvel/controller/comics_store.dart';
 import 'package:flutter_marvel/pages/charactersdetails_page.dart';
-import 'package:flutter_marvel/pages/home_page.dart';
 import 'package:flutter_marvel/themes/theme.dart';
+import 'package:flutter_marvel/widgets/bottomBar.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:get_it/get_it.dart';
 
@@ -28,6 +29,7 @@ class _CharactersPageState extends State<CharactersPage> {
     return Scaffold(
       resizeToAvoidBottomInset: true,
       backgroundColor: backgroundColor,
+      bottomNavigationBar: BottomBar(),
       appBar: AppBar(
         backgroundColor: secondaryBlack,
         centerTitle: true,
@@ -89,12 +91,6 @@ class _CharactersPageState extends State<CharactersPage> {
                 icon: const Icon(Icons.search)),
           )
         ],
-        leading: GestureDetector(
-            onTap: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => const HomePage()));
-            },
-            child: const Icon(Icons.arrow_back_ios_new)),
       ),
       body: SingleChildScrollView(
         child: Column(

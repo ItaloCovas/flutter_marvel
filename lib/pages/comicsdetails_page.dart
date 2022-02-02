@@ -1,5 +1,4 @@
 import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_marvel/controller/comics_store.dart';
 import 'package:flutter_marvel/themes/theme.dart';
@@ -38,8 +37,7 @@ class _ComicsDetailsPageState extends State<ComicsDetailsPage> {
     int min = 6;
     int max = 10;
     double randomNumber = min + ((max - min) * Random().nextDouble());
-    var width = MediaQuery.of(context).size.width;
-    var height = MediaQuery.of(context).size.height;
+
     var comics = comicsStore.comicsModel![index];
 
     return Scaffold(

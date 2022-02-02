@@ -3,11 +3,11 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_marvel/controller/series_store.dart';
-import 'package:flutter_marvel/pages/characters_page.dart';
-import 'package:flutter_marvel/pages/comics_page.dart';
-import 'package:flutter_marvel/pages/home_page.dart';
+
 import 'package:flutter_marvel/pages/seriesdetails_page.dart';
 import 'package:flutter_marvel/themes/theme.dart';
+import 'package:flutter_marvel/widgets/bottomBar.dart';
+
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:get_it/get_it.dart';
 
@@ -32,47 +32,7 @@ class _SeriesPageState extends State<SeriesPage> {
     return Scaffold(
       resizeToAvoidBottomInset: true,
       backgroundColor: backgroundColor,
-      bottomNavigationBar: Observer(builder: (_) {
-        return BottomNavigationBar(
-          backgroundColor: secondaryBlack.withOpacity(0.5),
-          showSelectedLabels: true,
-          showUnselectedLabels: true,
-          selectedItemColor: primaryButton,
-          unselectedItemColor: titleColor,
-          currentIndex: seriesStore.selectedIndex,
-          onTap: (index) => seriesStore.selectedIndex = index,
-          items: [
-            BottomNavigationBarItem(
-              icon: IconButton(
-                onPressed: () {
-                  print('teste');
-                },
-                icon: const Icon(Icons.live_tv_rounded),
-              ),
-              label: "Series",
-            ),
-            BottomNavigationBarItem(
-              icon: IconButton(
-                onPressed: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (_) => const CharactersPage()));
-                },
-                icon: const Icon(Icons.face),
-              ),
-              label: "Characters",
-            ),
-            BottomNavigationBarItem(
-              icon: IconButton(
-                onPressed: () {
-                  print('teste');
-                },
-                icon: const Icon(Icons.schedule),
-              ),
-              label: "Events",
-            )
-          ],
-        );
-      }),
+      bottomNavigationBar: BottomBar(),
       appBar: AppBar(
         backgroundColor: secondaryBlack,
         centerTitle: true,
@@ -134,12 +94,6 @@ class _SeriesPageState extends State<SeriesPage> {
                 icon: const Icon(Icons.search)),
           )
         ],
-        leading: GestureDetector(
-            onTap: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => const HomePage()));
-            },
-            child: const Icon(Icons.arrow_back_ios_new)),
       ),
       body: SingleChildScrollView(
         child: Column(

@@ -6,6 +6,7 @@ import 'package:flutter_marvel/controller/events_store.dart';
 import 'package:flutter_marvel/controller/series_store.dart';
 import 'package:flutter_marvel/pages/comics_page.dart';
 import 'package:flutter_marvel/pages/loading_page.dart';
+import 'package:flutter_marvel/themes/theme.dart';
 import 'package:get_it/get_it.dart';
 
 void main() {

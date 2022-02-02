@@ -4,8 +4,9 @@ import 'package:flutter_marvel/controller/events_store.dart';
 import 'package:flutter_marvel/pages/characters_page.dart';
 import 'package:flutter_marvel/pages/comics_page.dart';
 import 'package:flutter_marvel/pages/eventsdetails_page.dart';
-import 'package:flutter_marvel/pages/home_page.dart';
+
 import 'package:flutter_marvel/themes/theme.dart';
+import 'package:flutter_marvel/widgets/bottomBar.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:get_it/get_it.dart';
 
@@ -29,52 +30,7 @@ class _EventsPageState extends State<EventsPage> {
     return Scaffold(
       resizeToAvoidBottomInset: true,
       backgroundColor: backgroundColor,
-      bottomNavigationBar: Observer(builder: (_) {
-        return BottomNavigationBar(
-          backgroundColor: secondaryBlack.withOpacity(0.5),
-          showSelectedLabels: true,
-          showUnselectedLabels: true,
-          selectedFontSize: 14,
-          selectedIconTheme:
-              const IconThemeData(color: primaryButton, size: 30),
-          selectedItemColor: primaryButton,
-          unselectedItemColor: titleColor,
-          currentIndex: eventsStore.selectedIndex,
-          onTap: (index) => eventsStore.selectedIndex = index,
-          items: [
-            BottomNavigationBarItem(
-              icon: IconButton(
-                onPressed: () {
-                  Navigator.of(context).push(
-                      MaterialPageRoute(builder: (_) => const ComicsPage()));
-                },
-                icon: const Icon(Icons.menu_book),
-              ),
-              label: "Comics",
-            ),
-            BottomNavigationBarItem(
-              icon: IconButton(
-                onPressed: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (_) => const CharactersPage()));
-                },
-                icon: const Icon(Icons.face),
-              ),
-              label: "Characters",
-            ),
-            BottomNavigationBarItem(
-              icon: IconButton(
-                onPressed: () {
-                  onPressed:
-                  () {};
-                },
-                icon: const Icon(Icons.schedule),
-              ),
-              label: "Events",
-            )
-          ],
-        );
-      }),
+      bottomNavigationBar: BottomBar(),
       appBar: AppBar(
         backgroundColor: secondaryBlack,
         centerTitle: true,
