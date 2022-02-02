@@ -63,21 +63,24 @@ class _EventsPageState extends State<EventsPage> {
                       ),
                     ),
                   )
-                : Text(
-                    "Marvel Events".toUpperCase(),
-                    style: const TextStyle(
-                      color: primaryButton,
-                      fontFamily: 'Marvel',
-                      fontWeight: FontWeight.w600,
-                      letterSpacing: 3,
-                      fontSize: 35,
-                      shadows: [
-                        Shadow(
-                          blurRadius: 6.0,
-                          color: Colors.black,
-                          offset: Offset(2.0, 2.0),
-                        ),
-                      ],
+                : Padding(
+                    padding: const EdgeInsets.only(top: 4),
+                    child: Text(
+                      "Marvel Events".toUpperCase(),
+                      style: const TextStyle(
+                        color: primaryButton,
+                        fontFamily: 'Marvel',
+                        fontWeight: FontWeight.w600,
+                        letterSpacing: 3,
+                        fontSize: 35,
+                        shadows: [
+                          Shadow(
+                            blurRadius: 6.0,
+                            color: Colors.black,
+                            offset: Offset(2.0, 2.0),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
           );

@@ -78,21 +78,24 @@ class _ComicsPageState extends State<ComicsPage> {
                           )),
                     ),
                   )
-                : Text(
-                    "Marvel Comics".toUpperCase(),
-                    style: const TextStyle(
-                      color: primaryButton,
-                      fontFamily: 'Marvel',
-                      fontWeight: FontWeight.w600,
-                      letterSpacing: 3,
-                      fontSize: 35,
-                      shadows: [
-                        Shadow(
-                          blurRadius: 6.0,
-                          color: Colors.black,
-                          offset: Offset(2.0, 2.0),
-                        ),
-                      ],
+                : Padding(
+                    padding: const EdgeInsets.only(top: 4),
+                    child: Text(
+                      "Marvel Comics".toUpperCase(),
+                      style: const TextStyle(
+                        color: primaryButton,
+                        fontFamily: 'Marvel',
+                        fontWeight: FontWeight.w600,
+                        letterSpacing: 3,
+                        fontSize: 35,
+                        shadows: [
+                          Shadow(
+                            blurRadius: 6.0,
+                            color: Colors.black,
+                            offset: Offset(2.0, 2.0),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
           );

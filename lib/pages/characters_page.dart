@@ -1,7 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_marvel/controller/characters_store.dart';
-import 'package:flutter_marvel/controller/comics_store.dart';
+
 import 'package:flutter_marvel/pages/charactersdetails_page.dart';
 import 'package:flutter_marvel/themes/theme.dart';
 import 'package:flutter_marvel/widgets/bottomBar.dart';
@@ -62,21 +62,24 @@ class _CharactersPageState extends State<CharactersPage> {
                       ),
                     ),
                   )
-                : Text(
-                    "Marvel Characters".toUpperCase(),
-                    style: const TextStyle(
-                      color: primaryButton,
-                      fontFamily: 'Marvel',
-                      fontWeight: FontWeight.w600,
-                      letterSpacing: 2,
-                      fontSize: 30,
-                      shadows: [
-                        Shadow(
-                          blurRadius: 6.0,
-                          color: Colors.black,
-                          offset: Offset(2.0, 2.0),
-                        ),
-                      ],
+                : Padding(
+                    padding: const EdgeInsets.only(top: 4),
+                    child: Text(
+                      "Marvel Characters".toUpperCase(),
+                      style: const TextStyle(
+                        color: primaryButton,
+                        fontFamily: 'Marvel',
+                        fontWeight: FontWeight.w600,
+                        letterSpacing: 2,
+                        fontSize: 30,
+                        shadows: [
+                          Shadow(
+                            blurRadius: 6.0,
+                            color: Colors.black,
+                            offset: Offset(2.0, 2.0),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
           );
