@@ -195,6 +195,7 @@ class _ComicsDetailsPageState extends State<ComicsDetailsPage> {
                             color: Colors.grey.shade400,
                             fontSize: 16,
                           )),
+                      SizedBox(height: 25)
                     ],
                   ),
                 ),

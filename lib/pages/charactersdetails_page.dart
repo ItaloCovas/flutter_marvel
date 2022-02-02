@@ -95,34 +95,29 @@ class _CharacterDetailsPage extends State<CharacterDetailsPage> {
                     height: 300,
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 170),
-                  child: Row(
-                    children: [
-                      Hero(
-                        tag: widget.heroTag,
-                        child: Material(
-                          type: MaterialType.transparency,
-                          child: Container(
-                            decoration: BoxDecoration(
-                              border: Border.all(
-                                  width: 2, color: Colors.grey.shade400),
-                            ),
-                            child: Image.network(
-                              "${characters.thumbnail!.path}.${characters.thumbnail!.extension}",
-                              width: 120,
-                              height: 180,
-                              fit: BoxFit.cover,
-                            ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Hero(
+                      tag: widget.heroTag,
+                      child: Material(
+                        type: MaterialType.transparency,
+                        child: Container(
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                                width: 2, color: Colors.grey.shade400),
+                          ),
+                          child: Image.network(
+                            "${characters.thumbnail!.path}.${characters.thumbnail!.extension}",
+                            alignment: Alignment.center,
+                            width: 120,
+                            height: 180,
+                            fit: BoxFit.cover,
                           ),
                         ),
                       ),
-                      const SizedBox(width: 10),
-                      const Padding(
-                        padding: EdgeInsets.only(right: 40, left: 20),
-                      ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
                 const SizedBox(
                   height: 30,
