@@ -24,7 +24,7 @@ class BottomBar extends StatelessWidget {
         showSelectedLabels: true,
         showUnselectedLabels: true,
         selectedFontSize: 14,
-        selectedIconTheme: const IconThemeData(color: primaryButton, size: 30),
+        selectedIconTheme: const IconThemeData(color: primaryButton, size: 25),
         selectedItemColor: primaryButton,
         unselectedItemColor: titleColor,
         currentIndex: comicsStore.selectedIndex,
@@ -65,13 +65,13 @@ class BottomBar extends StatelessWidget {
               ),
               label: "Comics"),
           BottomNavigationBarItem(
-              icon: Icon(Icons.live_tv_outlined, size: 20), label: "Series"),
+              icon: Icon(Icons.live_tv_outlined), label: "Series"),
           BottomNavigationBarItem(
-            icon: Icon(Icons.face, size: 16),
+            icon: Icon(Icons.face),
             label: "Characters",
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.schedule, size: 16),
+            icon: Icon(Icons.schedule),
             label: "Events",
           ),
         ],
