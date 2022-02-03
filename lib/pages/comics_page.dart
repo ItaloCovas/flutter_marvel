@@ -79,7 +79,7 @@ class _ComicsPageState extends State<ComicsPage> {
                     ),
                   )
                 : Padding(
-                    padding: const EdgeInsets.only(top: 4),
+                    padding: const EdgeInsets.only(top: 6),
                     child: Text(
                       "Marvel Comics".toUpperCase(),
                       style: const TextStyle(

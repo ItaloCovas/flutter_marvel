@@ -64,7 +64,7 @@ class _EventsPageState extends State<EventsPage> {
                     ),
                   )
                 : Padding(
-                    padding: const EdgeInsets.only(top: 4),
+                    padding: const EdgeInsets.only(top: 5),
                     child: Text(
                       "Marvel Events".toUpperCase(),
                       style: const TextStyle(
@@ -109,7 +109,7 @@ class _EventsPageState extends State<EventsPage> {
                       options: CarouselOptions(
                         height: 250,
                         aspectRatio: 20 / 15,
-                        viewportFraction: 0.5,
+                        viewportFraction: 0.6,
                         initialPage: 0,
                         enableInfiniteScroll: true,
                         reverse: false,

@@ -66,7 +66,7 @@ class _SeriesPageState extends State<SeriesPage> {
                     ),
                   )
                 : Padding(
-                    padding: const EdgeInsets.only(top: 4),
+                    padding: const EdgeInsets.only(top: 5),
                     child: Text(
                       "Marvel Series".toUpperCase(),
                       style: const TextStyle(
@@ -74,7 +74,7 @@ class _SeriesPageState extends State<SeriesPage> {
                         fontFamily: 'Marvel',
                         fontWeight: FontWeight.w600,
                         letterSpacing: 3,
-                        fontSize: 40,
+                        fontSize: 35,
                         shadows: [
                           Shadow(
                             blurRadius: 6.0,
@@ -110,8 +110,8 @@ class _SeriesPageState extends State<SeriesPage> {
                     child: CarouselSlider.builder(
                       options: CarouselOptions(
                         height: 250,
-                        aspectRatio: 20 / 15,
-                        viewportFraction: 0.5,
+                        aspectRatio: 20 / 20,
+                        viewportFraction: 0.6,
                         initialPage: 0,
                         enableInfiniteScroll: true,
                         reverse: false,

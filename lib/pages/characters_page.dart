@@ -63,7 +63,7 @@ class _CharactersPageState extends State<CharactersPage> {
                     ),
                   )
                 : Padding(
-                    padding: const EdgeInsets.only(top: 4),
+                    padding: const EdgeInsets.only(top: 5, right: 6),
                     child: Text(
                       "Marvel Characters".toUpperCase(),
                       style: const TextStyle(
@@ -71,7 +71,7 @@ class _CharactersPageState extends State<CharactersPage> {
                         fontFamily: 'Marvel',
                         fontWeight: FontWeight.w600,
                         letterSpacing: 2,
-                        fontSize: 30,
+                        fontSize: 35,
                         shadows: [
                           Shadow(
                             blurRadius: 6.0,
